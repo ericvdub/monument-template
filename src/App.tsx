@@ -4,7 +4,9 @@ import { Services } from './components/Services';
 import { Gallery } from './components/Gallery';
 import { About } from './components/About';
 import { ProcessSteps } from './components/ProcessSteps';
+import { OnlineDesignerCTA } from './components/OnlineDesignerCTA';
 import { Testimonials } from './components/Testimonials';
+import { FAQ } from './components/FAQ';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
@@ -15,9 +17,11 @@ export default function App() {
       <Hero />
       <Services />
       <Gallery />
-      {/* <About /> */}
+      <About />
       <ProcessSteps />
+      <OnlineDesignerCTA />
       <Testimonials />
+      <FAQ />
       <Contact />
       <Footer />
     </div>

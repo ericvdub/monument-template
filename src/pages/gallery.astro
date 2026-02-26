@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { GalleryPage } from '../components/GalleryPage';
+import "../styles/index.css";
+---
+
+<Layout
+  title="Monument Gallery | Ivey Monuments | Carroll County, IL"
+  description="Browse granite monuments, flat markers, benches, and custom memorial designs by Ivey Monuments, serving Carroll County and northwest Illinois since 1875."
+>
+  <GalleryPage client:load />
+</Layout>

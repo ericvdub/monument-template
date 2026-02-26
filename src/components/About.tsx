@@ -4,7 +4,7 @@ import IconWrapper from './ui/IconWrapper';
 const stats = [
   {
     icon: Clock,
-    number: '45+',
+    number: '145+',
     label: 'Years in Business',
   },
   {
@@ -19,8 +19,8 @@ const stats = [
   },
   {
     icon: MapPin,
-    number: '3',
-    label: 'Iowa Locations',
+    number: '1',
+    label: 'Illinois Location',
   },
 ];
 
@@ -30,10 +30,10 @@ export function About() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl mb-6 font-serif">Family-Owned Since 1975</h2>
+            <h2 className="text-4xl mb-6 font-serif">Family-Owned Since 1875</h2>
             <div className="space-y-4 text-slate-700">
               <p>
-                Heritage Monuments has been serving Iowa families for over four decades. Founded by John and Mary Thompson, our family business continues to uphold the values of quality craftsmanship, personal service, and compassionate care.
+                Ivey Monuments has been serving Illinois families for over a century. Founded in 1875 in Mt Carroll, our family business continues to uphold the values of quality craftsmanship, personal service, and compassionate care.
               </p>
               <p>
                 We understand that choosing a memorial is a deeply personal decision. Our experienced team works closely with each family to create a lasting tribute that truly honors their loved one's memory and legacy.

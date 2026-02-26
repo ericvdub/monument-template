@@ -4,18 +4,18 @@ import { Card, CardContent } from "./ui/card";
 const testimonials = [
   {
     name: "Sarah Johnson",
-    location: "Des Moines, IA",
-    text: "The team at Heritage Monuments helped us create a beautiful memorial for my father. They were patient, understanding, and the craftsmanship is exceptional. We couldn't be more grateful.",
+    location: "Mt Carroll, IL",
+    text: "The team at Ivey Monuments helped us create a beautiful memorial for my father. They were patient, understanding, and the craftsmanship is exceptional. We couldn't be more grateful.",
   },
   {
     name: "Michael and Linda Chen",
-    location: "Cedar Rapids, IA",
+    location: "Savanna, IL",
     text: "From design to installation, everything was handled with professionalism and care. The monument is exactly what we envisioned. Thank you for honoring our mother's memory so beautifully.",
   },
   {
     name: "Robert Martinez",
-    location: "Iowa City, IA",
-    text: "I highly recommend Heritage Monuments. They restored my grandparents' headstone and it looks brand new. Their attention to detail and respect for family history is outstanding.",
+    location: "Morrison, IL",
+    text: "I highly recommend Ivey Monuments. They restored my grandparents' headstone and it looks brand new. Their attention to detail and respect for family history is outstanding.",
   },
 ];
 
@@ -28,7 +28,7 @@ export function Testimonials() {
             What Families Say
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            We're honored to serve Iowa families during their
+            We're honored to serve Illinois families during their
             time of need.
           </p>
         </div>

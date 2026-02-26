@@ -17,34 +17,35 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#about', label: 'About' },
-    { href: '#process', label: 'Process' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/', label: 'Home', isAnchor: false },
+    { href: '/about', label: 'About', isAnchor: false },
+    { href: '/#services', label: 'Services', isAnchor: true },
+    { href: '/gallery', label: 'Gallery', isAnchor: false },
+    { href: '/materials', label: 'Materials', isAnchor: false },
+    { href: '/contact', label: 'Contact', isAnchor: false },
   ];
 
   const handleLinkClick = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.replace('#', '');
-    const targetElement = document.getElementById(targetId);
-    
-    if (targetElement) {
-      const offset = 80; // Offset for navbar height
-      const elementPosition = targetElement.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
+    if (!isAnchor) {
+      setIsMobileMenuOpen(false);
+      return;
     }
-    
+    // Only smooth scroll for same-page anchor links
+    const hash = href.includes('#') ? href.split('#')[1] : '';
+    if (hash && window.location.pathname === '/') {
+      e.preventDefault();
+      const targetElement = document.getElementById(hash);
+      if (targetElement) {
+        const offset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    }
     setIsMobileMenuOpen(false);
   };
 
@@ -89,7 +90,7 @@ export function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  onClick={(e) => handleSmoothScroll(e, link.href, link.isAnchor)}
                   className={`transition-colors hover:opacity-70 ${
                     isScrolled ? 'text-slate-700' : 'text-white'
                   }`}
@@ -160,9 +161,9 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => handleSmoothScroll(e, link.href)}
+                onClick={(e) => handleSmoothScroll(e, link.href, link.isAnchor)}
                 className="text-slate-700 transition-colors text-lg"
-                style={{ 
+                style={{
                   color: 'var(--foreground)',
                 }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}

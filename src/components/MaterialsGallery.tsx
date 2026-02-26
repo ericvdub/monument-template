@@ -95,7 +95,7 @@ export function MaterialsGallery() {
       {/* Intro */}
       <section className="py-16 px-6 bg-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-serif mb-4">Choosing Your Material</h2>
+          <h2 className="text-4xl font-serif mb-4">Choosing Your Material</h2>
           <p className="text-slate-600 text-lg">
             The material you choose shapes the look and feel of your monument for decades. Our team will help you select the right option based on your cemetery's requirements, your budget, and your vision. Below is an overview of the materials we carry.
           </p>
@@ -106,7 +106,7 @@ export function MaterialsGallery() {
       {categories.map((category) => (
         <section key={category} className="py-16 px-6 odd:bg-slate-50 even:bg-white">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-serif mb-8 text-slate-900">{category}</h2>
+            <h3 className="text-3xl font-serif mb-8 text-slate-900">{category}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {materials
                 .filter((m) => m.category === category)
@@ -124,7 +124,7 @@ export function MaterialsGallery() {
                       )}
                     </div>
                     <CardContent className="pt-4">
-                      <h3 className="text-lg font-semibold mb-2">{material.name}</h3>
+                      <h4 className="text-lg font-semibold mb-2">{material.name}</h4>
                       <p className="text-slate-600 text-sm">{material.description}</p>
                     </CardContent>
                   </Card>
@@ -149,7 +149,7 @@ export function MaterialsGallery() {
         style={{ background: 'linear-gradient(135deg, var(--brand-gradient-from), var(--brand-gradient-to))' }}
       >
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-serif mb-4 text-slate-900">Visit Our Showroom</h2>
+          <h2 className="text-4xl font-serif mb-4 text-slate-900">Visit Our Showroom</h2>
           <p className="text-slate-700 mb-8">
             See and touch our granite samples in person at our Mt Carroll location. Our team will walk you through every option.
           </p>

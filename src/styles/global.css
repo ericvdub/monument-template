@@ -150,7 +150,8 @@
     }
 
     h2 {
-      font-size: var(--text-xl);
+	  font-family: 'font-serif';
+      font-size: var(--text-4xl);
       font-weight: var(--font-weight-medium);
       line-height: 1.5;
     }

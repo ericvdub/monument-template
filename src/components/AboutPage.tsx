@@ -162,7 +162,7 @@ export function AboutPage() {
         style={{ background: 'linear-gradient(135deg, var(--brand-gradient-from), var(--brand-gradient-to))' }}
       >
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-serif mb-4 text-slate-900">Ready to Get Started?</h2>
+          <h3 className="text-3xl font-serif mb-4 text-slate-900">Ready to Get Started?</h3>
           <p className="text-slate-700 mb-8">
             Contact us today for a free consultation. We're here to help you create a lasting memorial.
           </p>

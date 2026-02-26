@@ -44,7 +44,7 @@ export function Hero() {
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl px-6 w-full ml-auto">
           <div className="max-w-2xl">
-            <h2 className="text-5xl md:text-6xl mb-6 font-serif ">
+            <h2 className="text-5xl md:text-6xl mb-6 font-serif">
               A Lifetime Guarantee for a Lasting Legacy
             </h2>
             <p className="text-xl text-text-primary-foreground mb-8">

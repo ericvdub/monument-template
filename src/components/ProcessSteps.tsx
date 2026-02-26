@@ -43,7 +43,7 @@ export function ProcessSteps() {
     <section id="process" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl mb-4">Design at Home</h2>
+          <h2 className="text-4xl mb-4 font-serif">Design at Home</h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Use our free interactive, step-by-step tool to choose
             your style, colors, and engravings from the comfort

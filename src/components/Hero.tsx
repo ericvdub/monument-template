@@ -53,14 +53,13 @@ export function Hero() {
             <div className="flex flex-wrap gap-4">
               <Button
                 size="lg"
-                className="bg-white text-black hover:bg-slate-100 rounded-full"
+				variant="secondary"
               >
                 <a href="#contact">Create a Design Online</a>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-black/20 border-primary text-white hover:text-white hover:bg-black rounded-full text-lg"
                 asChild
               >
                 <a href="tel:815-244-3034" className="flex items-center gap-2">

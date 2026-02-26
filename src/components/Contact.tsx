@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card, CardContent } from './ui/card';
+import IconWrapper from './ui/IconWrapper';
 
 export function Contact() {
   return (
@@ -56,7 +57,7 @@ export function Contact() {
                       rows={4}
                     />
                   </div>
-                  <Button type="submit" className="w-full text-white bg-primary" >
+                  <Button type="submit" className="w-full" >
                     Submit Request
                   </Button>
                 </form>
@@ -66,9 +67,7 @@ export function Contact() {
 
           <div className="space-y-6">
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-primary-foreground rounded-lg flex items-center justify-center border">
-                <Phone className="w-5 h-5 text-primary" />
-              </div>
+              <IconWrapper icon={Phone} />
               <div>
                 <h3 className="text-lg mb-1">Phone</h3>
                 <p className="text-slate-600">(815) 244-3034</p>
@@ -76,9 +75,7 @@ export function Contact() {
             </div>
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Mail className="w-5 h-5 text-white" />
-              </div>
+              <IconWrapper icon={Mail} />
               <div>
                 <h3 className="text-lg mb-1">Email</h3>
                 <p className="text-slate-600">info@iveymonuments.com</p>
@@ -86,9 +83,7 @@ export function Contact() {
             </div>
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-white" />
-              </div>
+              <IconWrapper icon={MapPin} />
               <div>
                 <h3 className="text-lg mb-1">Location</h3>
                 <p className="text-slate-600">204 W Market St,</p>
@@ -97,9 +92,7 @@ export function Contact() {
             </div>
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Clock className="w-5 h-5 text-white" />
-              </div>
+              <IconWrapper icon={Clock} />
               <div>
                 <h3 className="text-lg mb-1">Hours</h3>
                 <p className="text-slate-600">Monday - Friday: 10:00 AM - 2:00 PM</p>

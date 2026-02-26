@@ -1,5 +1,6 @@
 import { Heart, Hammer, Palette, Clock } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
+import IconWrapper from './ui/IconWrapper';
 
 const services = [
   {
@@ -37,14 +38,10 @@ export function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
-            const Icon = service.icon;
             return (
               <Card key={index} className="border-slate-200 hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
-                       style={{ backgroundColor: 'var(--brand-primary-bg)' }}>
-                    <Icon className="w-6 h-6" style={{ color: 'var(--brand-primary)' }} />
-                  </div>
+                  <IconWrapper icon={service.icon} />
                   <h3 className="text-xl mb-3">{service.title}</h3>
                   <p className="text-slate-600">{service.description}</p>
                 </CardContent>

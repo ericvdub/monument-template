@@ -1,4 +1,5 @@
 import { Award, Users, MapPin, Clock } from 'lucide-react';
+import IconWrapper from './ui/IconWrapper';
 
 const stats = [
   {
@@ -45,12 +46,9 @@ export function About() {
 
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, index) => {
-              const Icon = stat.icon;
               return (
                 <div key={index} className="bg-white p-6 rounded-lg text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-slate-900 rounded-lg mb-4">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
+                  <IconWrapper icon={stat.icon} />
                   <div className="text-3xl mb-2">{stat.number}</div>
                   <div className="text-slate-600">{stat.label}</div>
                 </div>

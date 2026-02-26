@@ -29,8 +29,8 @@ export function Gallery() {
       {/* Marquee Container */}
       <div className="relative">
         {/* Gradient overlays for fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 md:w-32 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 md:w-32 bg-gradient-to-l from-white to-transparent z-10" />
         
         {/* Marquee wrapper */}
         <div className="flex">
@@ -63,6 +63,19 @@ export function Gallery() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Gallery CTA */}
+      <div className="flex justify-center mt-12">
+        <a
+          href="/gallery"
+          className="group inline-flex items-center gap-2 font-serif text-lg text-slate-700 border-b border-amber-500 pb-0.5 hover:text-amber-700 hover:border-amber-700 transition-colors duration-200"
+        >
+          <span className="tracking-wide">Browse the full gallery</span>
+          <span className="inline-block translate-x-0 group-hover:translate-x-1.5 transition-transform duration-200 text-amber-600">
+            &rarr;
+          </span>
+        </a>
       </div>
     </section>
   );

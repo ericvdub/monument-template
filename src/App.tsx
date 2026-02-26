@@ -14,8 +14,8 @@ export default function App() {
     <div className="min-h-screen bg-slate-50">
       <Navbar />
       <Hero />
-      <Gallery />
       <Services />
+      <Gallery />
       <ProcessSteps />
       <OnlineDesignerCTA />
       <Testimonials />

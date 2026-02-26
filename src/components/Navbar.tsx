@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import logoImage from '../assets/aea4d8c9de9b6aa6aa5110272a59d56bef458746.png';
+import logoImage from '../assets/logo/Ivey_Logo.png';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

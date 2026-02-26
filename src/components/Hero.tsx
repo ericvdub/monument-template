@@ -2,7 +2,8 @@ import { Phone, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import heroImage from "../assets/9603c851bd3f943399ed40250633f3da0ce0381e.png";
-import logoImage from "../assets/aea4d8c9de9b6aa6aa5110272a59d56bef458746.png";
+// import logoImage from "../assets/aea4d8c9de9b6aa6aa5110272a59d56bef458746.png";
+import logoImage from '../assets/logo/Ivey_Logo.png';
 
 export function Hero() {
   return (
@@ -43,23 +44,23 @@ export function Hero() {
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl px-6 w-full ml-auto">
           <div className="max-w-2xl">
-            <h2 className="text-5xl md:text-6xl mb-6 font-serif">
+            <h2 className="text-5xl md:text-6xl mb-6 font-serif ">
               A Lifetime Guarantee for a Lasting Legacy
             </h2>
-            <p className="text-xl text-slate-200 mb-8">
+            <p className="text-xl text-text-primary-foreground mb-8">
               Decades of experience helping families honor their loved ones with compassionate, personalized design.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
                 size="lg"
-                className="bg-white text-slate-900 hover:bg-slate-100"
+                className="bg-white text-black hover:bg-slate-100 rounded-full"
               >
                 <a href="#contact">Create a Design Online</a>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white/10 border-white text-white hover:bg-white/20"
+                className="bg-black/20 border-primary text-white hover:text-white hover:bg-black rounded-full text-lg"
                 asChild
               >
                 <a href="tel:815-244-3034" className="flex items-center gap-2">

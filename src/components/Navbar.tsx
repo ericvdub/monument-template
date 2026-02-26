@@ -81,6 +81,9 @@ export function Navbar() {
                 }`}>
                   Ivey Monuments
                 </h1>
+				<p className="text-sm text-slate-500">
+                  Serving Illinois Since 1875
+                </p>
               </div>
             </div>
 

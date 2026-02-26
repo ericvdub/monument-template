@@ -10,10 +10,10 @@ export function OnlineDesignerCTA() {
         </div>
 
         <h2 className="text-4xl mb-4 font-serif text-slate-900">
-          Design Your Monument Online
+          Honor Their Story, Your Way
         </h2>
         <p className="text-xl text-slate-700 mb-8 max-w-2xl mx-auto">
-          Use our free online designer to choose your granite color, monument shape, and lettering — then bring your design to us for a consultation.
+          Creating a memorial shouldn't add stress. Design a tribute that truly reflects their spirit — from anywhere, with anyone who loved them. 
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -25,7 +25,7 @@ export function OnlineDesignerCTA() {
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             onClick={() => window.open('https://www.memorialdealers.com/designing-a-memorial', '_blank')}
           >
-            Start Designing Free
+            Explore Memorial Ideas
             <ArrowRight className="w-5 h-5" />
           </Button>
           <Button

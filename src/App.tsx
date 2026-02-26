@@ -2,7 +2,6 @@ import { Hero } from './components/Hero';
 import { Navbar } from './components/Navbar';
 import { Services } from './components/Services';
 import { Gallery } from './components/Gallery';
-import { About } from './components/About';
 import { ProcessSteps } from './components/ProcessSteps';
 import { OnlineDesignerCTA } from './components/OnlineDesignerCTA';
 import { Testimonials } from './components/Testimonials';
@@ -15,9 +14,8 @@ export default function App() {
     <div className="min-h-screen bg-slate-50">
       <Navbar />
       <Hero />
-      <Services />
       <Gallery />
-      <About />
+      <Services />
       <ProcessSteps />
       <OnlineDesignerCTA />
       <Testimonials />

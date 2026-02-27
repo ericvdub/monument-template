@@ -23,7 +23,7 @@ export function OnlineDesignerCTA() {
             style={{ backgroundColor: 'var(--brand-primary)' }}
             onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-            onClick={() => window.open('https://www.memorialdealers.com/designing-a-memorial', '_blank')}
+            onClick={() => window.open('https://lastingmemori.com/designer/ivey-monuments', '_blank')}
           >
             Explore Memorial Ideas
             <ArrowRight className="w-5 h-5" />

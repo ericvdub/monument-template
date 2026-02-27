@@ -55,7 +55,7 @@ export function Hero() {
                 size="lg"
 				variant="secondary"
               >
-                <a href="https://lastingmemori.com/designer/ivey-monuments">Create a Design Online</a>
+                <a href="https://lastingmemori.com/designer/ivey-monuments">Start a Design Online</a>
               </Button>
               <Button
                 size="lg"

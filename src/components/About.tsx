@@ -30,7 +30,7 @@ export function About() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl mb-6 font-serif">Family-Owned Since 1875</h2>
+            <h2 className="text-4xl mb-6 font-serif">Serving Illinois Since 1875</h2>
             <div className="space-y-4 text-slate-700">
               <p>
                 Ivey Monuments has been serving Illinois families for over a century. Founded in 1875 in Mt Carroll, our family business continues to uphold the values of quality craftsmanship, personal service, and compassionate care.

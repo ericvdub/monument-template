@@ -1,17 +1,17 @@
-import img1 from '../assets/10d6e180eecb5772e12484e591fcf4b4b458aef7.png';
-import img2 from '../assets/be85dba127a447719c677807155d9961592a80a2.png';
-import img3 from '../assets/5e5790795bd94f541578ef04f306f3a8de14781a.png';
-import img4 from '../assets/17f6f6cd72d9e5314f41f3414f853c0926a86dc9.png';
-import img5 from '../assets/682005e07dc994de99f24b67685a79266343168b.png';
-import img6 from '../assets/d250bd85a89088fee3c888baccdceb96874946c0.png';
+import imgCourtley from '../assets/gallery/upright/individual/courtley.jpg';
+import imgLego from '../assets/gallery/custom/individual/lego.jpg';
+import imgBickelhaupt from '../assets/gallery/upright/individual/bickelhaupt.jpg';
+import imgKeim from '../assets/gallery/upright/individual/keim.jpg';
+import imgVick from '../assets/gallery/custom/individual/vick-jackie.png';
+import imgDauphin from '../assets/gallery/upright/individual/dauphin.jpg';
 
 const galleryImages = [
-  { src: img1.src, alt: 'Smith family memorial with autumn decorations' },
-  { src: img2.src, alt: 'Lego family memorial with custom truck engravings' },
-  { src: img3.src, alt: 'Petersons family memorial with animal silhouettes' },
-  { src: img4.src, alt: 'Bork family memorial with heart and floral design' },
-  { src: img5.src, alt: 'Schneider family memorial with wheat engraving' },
-  { src: img6.src, alt: 'Vick family memorial with personalized seasoning theme' },
+  { src: imgCourtley.src, alt: 'Smith family double upright in black granite' },
+  { src: imgLego.src, alt: 'Lego family monument with custom vehicle engravings' },
+  { src: imgBickelhaupt.src, alt: 'Paxton family monument with farm scene and portrait' },
+  { src: imgKeim.src, alt: 'Roberts family monument with pastoral landscape engraving' },
+  { src: imgVick.src, alt: 'Vick family flat marker with custom seasoning engravings' },
+  { src: imgDauphin.src, alt: 'Dauphin family double upright in black granite' },
 ];
 
 export function Gallery() {

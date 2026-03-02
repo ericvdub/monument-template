@@ -9,7 +9,7 @@ import drakeMike from '../assets/about/ivy-Drake-Mike.jpg';
 import originalStorefront from '../assets/about/ivey-originalstorefront.webp';
 import storeThen from '../assets/about/iveystore-then.webp';
 import johnIvey from '../assets/about/john-ivey.webp';
-import storeNow from '../assets/about/iveystore-now.webp';
+import storeNow from '../assets/about/iveystore-now.jpg';
 import storeSide from '../assets/about/storeside.webp';
 
 const photos = [
@@ -79,7 +79,7 @@ export function AboutPage() {
         style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">Family-Owned Since 1875</p>
+          <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">Serving Illinois Since 1875</p>
           <h1 className="text-5xl font-serif mb-6">Our Story</h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             For 150 years, Ivey Monuments has honored the lives of those we've lost — with granite, with care, and with the deep roots of an Illinois family business.

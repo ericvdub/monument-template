@@ -1,8 +1,7 @@
 import { Phone, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import heroImage from "../assets/9603c851bd3f943399ed40250633f3da0ce0381e.png";
-// import logoImage from "../assets/aea4d8c9de9b6aa6aa5110272a59d56bef458746.png";
+import heroImage from "../assets/landing/Hero_BG.png";
 import logoImage from '../assets/logo/Ivey_Logo.png';
 
 export function Hero() {

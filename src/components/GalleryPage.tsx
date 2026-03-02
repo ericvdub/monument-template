@@ -1,55 +1,126 @@
-import { useState } from 'react';
-import { X, ZoomIn } from 'lucide-react';
+import { useState, useEffect, useCallback, type CSSProperties } from 'react';
+import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 
-import img1 from '../assets/10d6e180eecb5772e12484e591fcf4b4b458aef7.png';
-import img2 from '../assets/be85dba127a447719c677807155d9961592a80a2.png';
-import img3 from '../assets/5e5790795bd94f541578ef04f306f3a8de14781a.png';
-import img4 from '../assets/17f6f6cd72d9e5314f41f3414f853c0926a86dc9.png';
-import img5 from '../assets/682005e07dc994de99f24b67685a79266343168b.png';
-import img6 from '../assets/d250bd85a89088fee3c888baccdceb96874946c0.png';
+interface GalleryImageModule {
+  default: { src: string };
+}
 
 interface GalleryItem {
   src: string;
   alt: string;
   category: string;
+  context: MemorialContext;
+  hasContext: boolean;
 }
 
-const allImages: GalleryItem[] = [
-  { src: img1.src, alt: 'Smith family memorial with autumn decorations', category: 'Upright Monuments' },
-  { src: img2.src, alt: 'Lego family memorial with custom truck engravings', category: 'Custom Designs' },
-  { src: img3.src, alt: 'Petersons family memorial with animal silhouettes', category: 'Upright Monuments' },
-  { src: img4.src, alt: 'Bork family memorial with heart and floral design', category: 'Flat Markers' },
-  { src: img5.src, alt: 'Schneider family memorial with wheat engraving', category: 'Custom Designs' },
-  { src: img6.src, alt: 'Vick family memorial with personalized seasoning theme', category: 'Custom Designs' },
-];
+type MemorialContext = 'Individual' | 'Companion';
 
-const categories = ['All', 'Upright Monuments', 'Flat Markers', 'Benches', 'Custom Designs', 'Restoration'];
+const categories = ['All', 'Upright Monuments', 'Flat Markers', 'Benches', 'Custom Monuments', 'Custom Stone Signage', 'Restoration'];
+const contexts: MemorialContext[] = ['Individual', 'Companion'];
+const categoryIndex = new Map(categories.map((category, index) => [category, index]));
+const folderToCategory: Record<string, string> = {
+  upright: 'Upright Monuments',
+  'flat-markers': 'Flat Markers',
+  benches: 'Benches',
+  custom: 'Custom Monuments',
+  'custom-stone-signage': 'Custom Stone Signage',
+  restoration: 'Restoration',
+};
+const contextFreeCategories = new Set(['Custom Stone Signage']);
+const folderToContext: Record<string, MemorialContext> = {
+  individual: 'Individual',
+  companion: 'Companion',
+};
 
-// Placeholder items for categories with no real images yet
-const placeholderItems: GalleryItem[] = [
-  { src: '', alt: 'Granite bench memorial', category: 'Benches' },
-  { src: '', alt: 'Cemetery bench with inscription', category: 'Benches' },
-  { src: '', alt: 'Restored headstone', category: 'Restoration' },
-  { src: '', alt: 'Monument restoration project', category: 'Restoration' },
-];
+const galleryModules = import.meta.glob<GalleryImageModule>(
+  '../assets/gallery/**/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true },
+);
 
-const combinedImages = [...allImages, ...placeholderItems];
+const toTitleCase = (value: string): string =>
+  value
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 
-function PlaceholderImage({ alt }: { alt: string }) {
-  return (
-    <div className="w-full h-full bg-slate-200 flex flex-col items-center justify-center gap-2">
-      <div className="w-12 h-12 rounded-full bg-slate-300 flex items-center justify-center">
-        <ZoomIn className="w-5 h-5 text-slate-400" />
-      </div>
-      <p className="text-slate-400 text-xs text-center px-2">{alt}</p>
-      <p className="text-slate-300 text-xs">Photo coming soon</p>
-    </div>
-  );
-}
+const createBaseLabel = (filename: string): string => {
+  const normalized = filename
+    .replace(/\.[^/.]+$/, '')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return toTitleCase(normalized);
+};
+
+const cleanLabelForCategory = (label: string, category: string): string => {
+  if (category === 'Benches') return label.replace(/^Bench\s+/i, '');
+  if (category === 'Flat Markers') return label.replace(/^(Flat|Slant|Bevel)\s+/i, '');
+  if (category === 'Upright Monuments') return label.replace(/^(Upright|Boulder)\s+/i, '');
+  return label;
+};
+
+const createAltText = (
+  filename: string,
+  category: string,
+  context: MemorialContext,
+  includeContext: boolean,
+): string => {
+  const label = createBaseLabel(filename);
+  const hasAltView = /\bAlt\b/i.test(label);
+  const primaryLabel = cleanLabelForCategory(label.replace(/\bAlt\b/gi, '').replace(/\s+/g, ' ').trim(), category);
+  const contextDescriptor = includeContext ? (context === 'Companion' ? 'companion ' : 'individual ') : '';
+  const descriptor = category === 'Upright Monuments'
+    ? 'upright monument'
+    : category === 'Flat Markers'
+      ? 'flat marker'
+      : category === 'Benches'
+        ? 'memorial bench'
+        : category === 'Custom Monuments'
+          ? 'custom design monument'
+          : category === 'Custom Stone Signage'
+            ? 'custom stone signage'
+          : 'restoration project';
+  return hasAltView
+    ? `${primaryLabel} ${contextDescriptor}${descriptor}, alternate view`
+    : `${primaryLabel} ${contextDescriptor}${descriptor}`;
+};
+
+const allImages: GalleryItem[] = Object.entries(galleryModules)
+  .map(([path, module]) => {
+    const relativePath = path.split('/gallery/')[1];
+    if (!relativePath) return null;
+
+    const [folder, ...pathSegments] = relativePath.split('/');
+    const category = folderToCategory[folder];
+    if (!category || pathSegments.length === 0) return null;
+
+    const isContextFreeCategory = contextFreeCategories.has(category);
+    const [maybeContext, ...segments] = pathSegments;
+    const hasContext = !isContextFreeCategory && Boolean(maybeContext && folderToContext[maybeContext]);
+    const context = hasContext ? folderToContext[maybeContext as keyof typeof folderToContext] : 'Individual';
+    const filenameSegments = hasContext ? segments : pathSegments;
+    if (filenameSegments.length === 0) return null;
+
+    const filename = filenameSegments[filenameSegments.length - 1];
+    return {
+      src: module.default.src,
+      alt: createAltText(filename, category, context, hasContext),
+      category,
+      context,
+      hasContext,
+    };
+  })
+  .filter((item): item is GalleryItem => item !== null)
+  .sort((a, b) => {
+    const categoryDelta = (categoryIndex.get(a.category) ?? 999) - (categoryIndex.get(b.category) ?? 999);
+    if (categoryDelta !== 0) return categoryDelta;
+    if (a.context !== b.context) return a.context === 'Individual' ? -1 : 1;
+    return a.alt.localeCompare(b.alt);
+  });
 
 interface GalleryGridProps {
   items: GalleryItem[];
@@ -72,24 +143,20 @@ function GalleryGrid({ items, onSelect }: GalleryGridProps) {
         <button
           key={index}
           className="group relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow focus:outline-none focus-visible:ring-2"
-          style={{ '--tw-ring-color': 'var(--brand-primary)' } as React.CSSProperties}
+          style={{ '--tw-ring-color': 'var(--brand-primary)' } as CSSProperties}
           onClick={() => onSelect(item)}
           aria-label={`View: ${item.alt}`}
         >
-          {item.src ? (
-            <>
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </>
-          ) : (
-            <PlaceholderImage alt={item.alt} />
-          )}
+          <>
+            <img
+              src={item.src}
+              alt={item.alt}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+              <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+          </>
         </button>
       ))}
     </div>
@@ -98,11 +165,56 @@ function GalleryGrid({ items, onSelect }: GalleryGridProps) {
 
 export function GalleryPage() {
   const [selected, setSelected] = useState<GalleryItem | null>(null);
+  const [activeTab, setActiveTab] = useState('All');
+  const [activeContext, setActiveContext] = useState<MemorialContext>('Individual');
 
-  const getFiltered = (category: string) =>
-    category === 'All'
-      ? combinedImages
-      : combinedImages.filter((img) => img.category === category);
+  const getFiltered = (category: string, context: MemorialContext) =>
+    allImages.filter((img) => {
+      const matchesCategory = category === 'All' || img.category === category;
+      const matchesContext = !img.hasContext || img.context === context;
+      return matchesCategory && matchesContext;
+    });
+
+  const viewableItems = getFiltered(activeTab, activeContext);
+  const currentIndex = selected ? viewableItems.findIndex(i => i.src === selected.src) : -1;
+  const isContextEnabled = activeTab !== 'Custom Stone Signage';
+
+  const close = useCallback(() => setSelected(null), []);
+  const prev = useCallback(() => {
+    setSelected(s => {
+      if (!s || viewableItems.length === 0) return s;
+      const items = viewableItems;
+      const idx = items.findIndex(i => i.src === s.src);
+      if (idx === -1) return items[0];
+      return items[(idx - 1 + items.length) % items.length];
+    });
+  }, [viewableItems]);
+  const next = useCallback(() => {
+    setSelected(s => {
+      if (!s || viewableItems.length === 0) return s;
+      const items = viewableItems;
+      const idx = items.findIndex(i => i.src === s.src);
+      if (idx === -1) return items[0];
+      return items[(idx + 1) % items.length];
+    });
+  }, [viewableItems]);
+
+  useEffect(() => {
+    if (selected && !viewableItems.some((item) => item.src === selected.src)) {
+      setSelected(null);
+    }
+  }, [selected, viewableItems]);
+
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selected, close, prev, next]);
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -125,11 +237,42 @@ export function GalleryPage() {
       {/* Gallery with Tabs */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <Tabs defaultValue="All">
-            <div className="overflow-x-auto pb-2 mb-8">
-              <TabsList className="flex w-max gap-1">
+          {isContextEnabled && (
+            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="inline-flex w-fit rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
+                {contexts.map((context) => {
+                  const count = getFiltered(activeTab, context).length;
+                  const isActive = activeContext === context;
+
+                  return (
+                    <button
+                      key={context}
+                      type="button"
+                      onClick={() => setActiveContext(context)}
+                      aria-pressed={isActive}
+                      className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${isActive ? 'text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}
+                      style={isActive ? { backgroundColor: 'var(--brand-primary)' } : undefined}
+                    >
+                      {context}
+                      <span className={`ml-2 text-xs ${isActive ? 'text-white/80' : 'text-slate-400'}`}>
+                        ({count})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <Tabs value={activeTab} onValueChange={setActiveTab} className='md:items-center'>
+            <div className="overflow-x-auto pb-3 mb-8">
+              <TabsList className="flex w-max gap-2 h-auto p-1.5">
                 {categories.map((cat) => (
-                  <TabsTrigger key={cat} value={cat} className="whitespace-nowrap">
+                  <TabsTrigger
+                    key={cat}
+                    value={cat}
+                    className="whitespace-nowrap text-sm md:text-base px-4 py-2.5 h-auto rounded-lg"
+                  >
                     {cat}
                   </TabsTrigger>
                 ))}
@@ -138,42 +281,56 @@ export function GalleryPage() {
 
             {categories.map((cat) => (
               <TabsContent key={cat} value={cat}>
-                <GalleryGrid items={getFiltered(cat)} onSelect={setSelected} />
+                <GalleryGrid items={getFiltered(cat, activeContext)} onSelect={setSelected} />
               </TabsContent>
             ))}
           </Tabs>
         </div>
       </section>
 
-      {/* Lightbox Dialog */}
-      <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
-        <DialogContent className="max-w-3xl p-2 bg-slate-900 border-slate-700">
-          <DialogTitle className="sr-only">{selected?.alt}</DialogTitle>
+      {/* Lightbox */}
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={close}
+        >
           <button
-            className="absolute top-3 right-3 text-white/70 hover:text-white z-10"
-            onClick={() => setSelected(null)}
+            onClick={close}
+            className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
             aria-label="Close"
           >
-            <X className="w-6 h-6" />
+            <X size={32} />
           </button>
-          {selected && (
-            <div>
-              {selected.src ? (
-                <img
-                  src={selected.src}
-                  alt={selected.alt}
-                  className="w-full max-h-[80vh] object-contain rounded-lg"
-                />
-              ) : (
-                <div className="w-full h-64 flex items-center justify-center bg-slate-800 rounded-lg">
-                  <PlaceholderImage alt={selected.alt} />
-                </div>
-              )}
-              <p className="text-slate-300 text-sm mt-3 px-2">{selected.alt}</p>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-4 text-white/70 hover:text-white transition-colors p-2"
+            aria-label="Previous"
+          >
+            <ChevronLeft size={40} />
+          </button>
+
+          <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={selected.src}
+              alt={selected.alt}
+              className="w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+            />
+            <p className="text-center text-white font-medium mt-4">{selected.alt}</p>
+            <p className="text-center text-white/40 text-xs mt-1">
+              {(currentIndex >= 0 ? currentIndex + 1 : 1)} / {Math.max(viewableItems.length, 1)}
+            </p>
+          </div>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-4 text-white/70 hover:text-white transition-colors p-2"
+            aria-label="Next"
+          >
+            <ChevronRight size={40} />
+          </button>
+        </div>
+      )}
 
       {/* CTA */}
       <section className="py-16 px-6 bg-white text-center">

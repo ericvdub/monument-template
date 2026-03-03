@@ -1,15 +1,18 @@
-import { useState, useEffect, useCallback, type CSSProperties } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo, type CSSProperties } from 'react';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 
-interface GalleryImageModule {
-  default: { src: string };
+interface RawImageData {
+  path: string;
+  thumbnailSrc: string;
+  fullSrc: string;
 }
 
 interface GalleryItem {
-  src: string;
+  thumbnailSrc: string;
+  fullSrc: string;
   alt: string;
   category: string;
   context: MemorialContext;
@@ -34,11 +37,6 @@ const folderToContext: Record<string, MemorialContext> = {
   individual: 'Individual',
   companion: 'Companion',
 };
-
-const galleryModules = import.meta.glob<GalleryImageModule>(
-  '../assets/gallery/**/*.{jpg,jpeg,png,webp,avif}',
-  { eager: true },
-);
 
 const toTitleCase = (value: string): string =>
   value
@@ -89,38 +87,43 @@ const createAltText = (
     : `${primaryLabel} ${contextDescriptor}${descriptor}`;
 };
 
-const allImages: GalleryItem[] = Object.entries(galleryModules)
-  .map(([path, module]) => {
-    const relativePath = path.split('/gallery/')[1];
-    if (!relativePath) return null;
+function buildGalleryItems(rawImages: RawImageData[]): GalleryItem[] {
+  return rawImages
+    .map(({ path, thumbnailSrc, fullSrc }) => {
+      const relativePath = path.split('/gallery/')[1];
+      if (!relativePath) return null;
 
-    const [folder, ...pathSegments] = relativePath.split('/');
-    const category = folderToCategory[folder];
-    if (!category || pathSegments.length === 0) return null;
+      const [folder, ...pathSegments] = relativePath.split('/');
+      const category = folderToCategory[folder];
+      if (!category || pathSegments.length === 0) return null;
 
-    const isContextFreeCategory = contextFreeCategories.has(category);
-    const [maybeContext, ...segments] = pathSegments;
-    const hasContext = !isContextFreeCategory && Boolean(maybeContext && folderToContext[maybeContext]);
-    const context = hasContext ? folderToContext[maybeContext as keyof typeof folderToContext] : 'Individual';
-    const filenameSegments = hasContext ? segments : pathSegments;
-    if (filenameSegments.length === 0) return null;
+      const isContextFreeCategory = contextFreeCategories.has(category);
+      const [maybeContext, ...segments] = pathSegments;
+      const hasContext = !isContextFreeCategory && Boolean(maybeContext && folderToContext[maybeContext]);
+      const context = hasContext ? folderToContext[maybeContext as keyof typeof folderToContext] : 'Individual';
+      const filenameSegments = hasContext ? segments : pathSegments;
+      if (filenameSegments.length === 0) return null;
 
-    const filename = filenameSegments[filenameSegments.length - 1];
-    return {
-      src: module.default.src,
-      alt: createAltText(filename, category, context, hasContext),
-      category,
-      context,
-      hasContext,
-    };
-  })
-  .filter((item): item is GalleryItem => item !== null)
-  .sort((a, b) => {
-    const categoryDelta = (categoryIndex.get(a.category) ?? 999) - (categoryIndex.get(b.category) ?? 999);
-    if (categoryDelta !== 0) return categoryDelta;
-    if (a.context !== b.context) return a.context === 'Individual' ? -1 : 1;
-    return a.alt.localeCompare(b.alt);
-  });
+      const filename = filenameSegments[filenameSegments.length - 1];
+      return {
+        thumbnailSrc,
+        fullSrc,
+        alt: createAltText(filename, category, context, hasContext),
+        category,
+        context,
+        hasContext,
+      };
+    })
+    .filter((item): item is GalleryItem => item !== null)
+    .sort((a, b) => {
+      const categoryDelta = (categoryIndex.get(a.category) ?? 999) - (categoryIndex.get(b.category) ?? 999);
+      if (categoryDelta !== 0) return categoryDelta;
+      if (a.context !== b.context) return a.context === 'Individual' ? -1 : 1;
+      return a.alt.localeCompare(b.alt);
+    });
+}
+
+const PAGE_SIZE = 12;
 
 interface GalleryGridProps {
   items: GalleryItem[];
@@ -128,6 +131,28 @@ interface GalleryGridProps {
 }
 
 function GalleryGrid({ items, onSelect }: GalleryGridProps) {
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [items]);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((c) => Math.min(c + PAGE_SIZE, items.length));
+        }
+      },
+      { rootMargin: '300px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [items.length]);
+
   if (items.length === 0) {
     return (
       <div className="text-center py-16 text-slate-500">
@@ -137,70 +162,84 @@ function GalleryGrid({ items, onSelect }: GalleryGridProps) {
     );
   }
 
+  const visibleItems = items.slice(0, visibleCount);
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {items.map((item, index) => (
-        <button
-          key={index}
-          className="group relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow focus:outline-none focus-visible:ring-2"
-          style={{ '--tw-ring-color': 'var(--brand-primary)' } as CSSProperties}
-          onClick={() => onSelect(item)}
-          aria-label={`View: ${item.alt}`}
-        >
-          <>
+    <>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {visibleItems.map((item, index) => (
+          <button
+            key={index}
+            className="group relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow focus:outline-none focus-visible:ring-2"
+            style={{ '--tw-ring-color': 'var(--brand-primary)' } as CSSProperties}
+            onClick={() => onSelect(item)}
+            onMouseEnter={() => { const img = new Image(); img.src = item.fullSrc; }}
+            aria-label={`View: ${item.alt}`}
+          >
             <img
-              src={item.src}
+              src={item.thumbnailSrc}
               alt={item.alt}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
               <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-          </>
-        </button>
-      ))}
-    </div>
+          </button>
+        ))}
+      </div>
+      {visibleCount < items.length && (
+        <div ref={sentinelRef} className="flex justify-center py-10">
+          <div className="w-6 h-6 rounded-full border-2 border-slate-300 border-t-amber-500 animate-spin" />
+        </div>
+      )}
+    </>
   );
 }
 
-export function GalleryPage() {
+export function GalleryPage({ images }: { images: RawImageData[] }) {
+  const allImages = useMemo(() => buildGalleryItems(images), [images]);
   const [selected, setSelected] = useState<GalleryItem | null>(null);
+  const [lightboxLoaded, setLightboxLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState('All');
   const [activeContext, setActiveContext] = useState<MemorialContext>('Individual');
-
-  const getFiltered = (category: string, context: MemorialContext) =>
-    allImages.filter((img) => {
-      const matchesCategory = category === 'All' || img.category === category;
-      const matchesContext = !img.hasContext || img.context === context;
-      return matchesCategory && matchesContext;
-    });
+  const getFiltered = useCallback(
+    (category: string, context: MemorialContext) =>
+      allImages.filter((img) => {
+        const matchesCategory = category === 'All' || img.category === category;
+        const matchesContext = !img.hasContext || img.context === context;
+        return matchesCategory && matchesContext;
+      }),
+    [allImages],
+  );
 
   const viewableItems = getFiltered(activeTab, activeContext);
-  const currentIndex = selected ? viewableItems.findIndex(i => i.src === selected.src) : -1;
+  const currentIndex = selected ? viewableItems.findIndex(i => i.thumbnailSrc === selected.thumbnailSrc) : -1;
   const isContextEnabled = activeTab !== 'Custom Stone Signage';
 
-  const close = useCallback(() => setSelected(null), []);
+  const close = useCallback(() => { setSelected(null); setLightboxLoaded(false); }, []);
   const prev = useCallback(() => {
+    setLightboxLoaded(false);
     setSelected(s => {
       if (!s || viewableItems.length === 0) return s;
-      const items = viewableItems;
-      const idx = items.findIndex(i => i.src === s.src);
-      if (idx === -1) return items[0];
-      return items[(idx - 1 + items.length) % items.length];
+      const idx = viewableItems.findIndex(i => i.thumbnailSrc === s.thumbnailSrc);
+      if (idx === -1) return viewableItems[0];
+      return viewableItems[(idx - 1 + viewableItems.length) % viewableItems.length];
     });
   }, [viewableItems]);
   const next = useCallback(() => {
+    setLightboxLoaded(false);
     setSelected(s => {
       if (!s || viewableItems.length === 0) return s;
-      const items = viewableItems;
-      const idx = items.findIndex(i => i.src === s.src);
-      if (idx === -1) return items[0];
-      return items[(idx + 1) % items.length];
+      const idx = viewableItems.findIndex(i => i.thumbnailSrc === s.thumbnailSrc);
+      if (idx === -1) return viewableItems[0];
+      return viewableItems[(idx + 1) % viewableItems.length];
     });
   }, [viewableItems]);
 
   useEffect(() => {
-    if (selected && !viewableItems.some((item) => item.src === selected.src)) {
+    if (selected && !viewableItems.some((item) => item.thumbnailSrc === selected.thumbnailSrc)) {
       setSelected(null);
     }
   }, [selected, viewableItems]);
@@ -311,11 +350,22 @@ export function GalleryPage() {
           </button>
 
           <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={selected.src}
-              alt={selected.alt}
-              className="w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
-            />
+            <div className="relative flex items-center justify-center min-h-[40vh]">
+              {/* Thumbnail shown instantly — already cached from the grid */}
+              <img
+                src={selected.thumbnailSrc}
+                alt=""
+                aria-hidden="true"
+                className={`absolute w-full max-h-[80vh] object-contain rounded-lg transition-opacity duration-300 ${lightboxLoaded ? 'opacity-0' : 'opacity-100'} blur-sm scale-[1.02]`}
+              />
+              {/* Full-size image fades in once loaded */}
+              <img
+                src={selected.fullSrc}
+                alt={selected.alt}
+                onLoad={() => setLightboxLoaded(true)}
+                className={`w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${lightboxLoaded ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </div>
             <p className="text-center text-white font-medium mt-4">{selected.alt}</p>
             <p className="text-center text-white/40 text-xs mt-1">
               {(currentIndex >= 0 ? currentIndex + 1 : 1)} / {Math.max(viewableItems.length, 1)}

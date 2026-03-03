@@ -18,11 +18,6 @@ const services = [
     title: 'Personalized Design',
     description: 'Work with our designers to create a unique memorial that reflects your loved one\'s personality and legacy.',
   },
-  {
-    icon: Clock,
-    title: 'Restoration Services',
-    description: 'Professional cleaning, repair, and restoration of existing monuments to preserve family memories.',
-  },
 ];
 
 export function Services() {
@@ -36,7 +31,7 @@ export function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => {
             return (
               <Card key={index} className="border-slate-200 hover:shadow-lg transition-shadow">

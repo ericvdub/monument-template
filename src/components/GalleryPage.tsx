@@ -21,7 +21,7 @@ interface GalleryItem {
 
 type MemorialContext = 'Individual' | 'Companion';
 
-const categories = ['All', 'Upright Monuments', 'Flat Markers', 'Benches', 'Custom Monuments', 'Custom Stone Signage', 'Restoration'];
+const categories = ['All', 'Upright Monuments', 'Flat Markers', 'Benches', 'Custom Monuments', 'Custom Stone Signage'];
 const contexts: MemorialContext[] = ['Individual', 'Companion'];
 const categoryIndex = new Map(categories.map((category, index) => [category, index]));
 const folderToCategory: Record<string, string> = {
@@ -30,7 +30,6 @@ const folderToCategory: Record<string, string> = {
   benches: 'Benches',
   custom: 'Custom Monuments',
   'custom-stone-signage': 'Custom Stone Signage',
-  restoration: 'Restoration',
 };
 const contextFreeCategories = new Set(['Custom Stone Signage']);
 const folderToContext: Record<string, MemorialContext> = {
@@ -81,7 +80,7 @@ const createAltText = (
           ? 'custom design monument'
           : category === 'Custom Stone Signage'
             ? 'custom stone signage'
-          : 'restoration project';
+          : '';
   return hasAltView
     ? `${primaryLabel} ${contextDescriptor}${descriptor}, alternate view`
     : `${primaryLabel} ${contextDescriptor}${descriptor}`;

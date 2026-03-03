@@ -130,6 +130,50 @@ interface GalleryGridProps {
   onSelect: (item: GalleryItem) => void;
 }
 
+interface ThumbnailProps {
+  item: GalleryItem;
+  onSelect: (item: GalleryItem) => void;
+  onPreload: (src: string) => void;
+}
+
+function GalleryThumbnail({ item, onSelect, onPreload }: ThumbnailProps) {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true);
+  }, []);
+
+  return (
+    <button
+      type="button"
+      className="group relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow focus:outline-none focus-visible:ring-2"
+      style={{ '--tw-ring-color': 'var(--brand-primary)' } as CSSProperties}
+      onClick={() => onSelect(item)}
+      onMouseEnter={() => onPreload(item.fullSrc)}
+      onFocus={() => onPreload(item.fullSrc)}
+      onTouchStart={() => onPreload(item.fullSrc)}
+      aria-label={`View: ${item.alt}`}
+    >
+      {!loaded && <div className="absolute inset-0 bg-slate-200 animate-pulse" />}
+      <img
+        ref={imgRef}
+        src={item.thumbnailSrc}
+        alt={item.alt}
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        className={`w-full h-full object-cover transition-[transform,opacity] duration-300 group-hover:scale-105 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+        <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+      </div>
+    </button>
+  );
+}
+
 function GalleryGrid({ items, resetKey, onSelect }: GalleryGridProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -174,29 +218,12 @@ function GalleryGrid({ items, resetKey, onSelect }: GalleryGridProps) {
     <>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {visibleItems.map((item) => (
-          <button
+          <GalleryThumbnail
             key={item.fullSrc}
-            type="button"
-            className="group relative aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow focus:outline-none focus-visible:ring-2"
-            style={{ '--tw-ring-color': 'var(--brand-primary)' } as CSSProperties}
-            onClick={() => onSelect(item)}
-            onMouseEnter={() => preloadFullImage(item.fullSrc)}
-            onFocus={() => preloadFullImage(item.fullSrc)}
-            onTouchStart={() => preloadFullImage(item.fullSrc)}
-            aria-label={`View: ${item.alt}`}
-          >
-            <img
-              src={item.thumbnailSrc}
-              alt={item.alt}
-              loading="lazy"
-              decoding="async"
-              fetchPriority="low"
-              className="w-full h-full bg-slate-200 object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-              <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
-          </button>
+            item={item}
+            onSelect={onSelect}
+            onPreload={preloadFullImage}
+          />
         ))}
       </div>
       {visibleCount < items.length && (

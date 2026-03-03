@@ -235,8 +235,22 @@ function GalleryGrid({ items, resetKey, onSelect }: GalleryGridProps) {
   );
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
 export function GalleryPage({ images }: { images: RawImageData[] }) {
   const allImages = useMemo(() => buildGalleryItems(images), [images]);
+  // Start with sorted items (matches SSR), then shuffle on the client after hydration
+  const [shuffledAllImages, setShuffledAllImages] = useState(allImages);
+  useEffect(() => {
+    setShuffledAllImages(shuffle(allImages));
+  }, [allImages]);
   const [selected, setSelected] = useState<GalleryItem | null>(null);
   const [lightboxLoaded, setLightboxLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState('All');
@@ -250,8 +264,13 @@ export function GalleryPage({ images }: { images: RawImageData[] }) {
       }),
     [allImages],
   );
+  // Stable memoized array for the All tab — same reference used by both the grid and viewableItems
+  const allTabItems = useMemo(
+    () => shuffledAllImages.filter((img) => !img.hasContext || img.context === activeContext),
+    [shuffledAllImages, activeContext],
+  );
 
-  const viewableItems = getFiltered(activeTab, activeContext);
+  const viewableItems = activeTab === 'All' ? allTabItems : getFiltered(activeTab, activeContext);
   const currentIndex = selected ? viewableItems.findIndex(i => i.thumbnailSrc === selected.thumbnailSrc) : -1;
   const isContextEnabled = activeTab !== 'Custom Stone Signage';
 
@@ -358,7 +377,7 @@ export function GalleryPage({ images }: { images: RawImageData[] }) {
             {categories.map((cat) => (
               <TabsContent key={cat} value={cat}>
                 <GalleryGrid
-                  items={getFiltered(cat, activeContext)}
+                  items={cat === 'All' ? allTabItems : getFiltered(cat, activeContext)}
                   resetKey={`${cat}:${activeContext}`}
                   onSelect={setSelected}
                 />

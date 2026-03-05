@@ -1,0 +1,206 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Navbar } from "../../components/Navbar";
+import { Footer } from "../../components/Footer";
+import {
+  cemeteryCoverage,
+  googleMapsUrl,
+  localBusinessId,
+  localBusinessSchema,
+  serviceAreas,
+} from "../../data/localSeo";
+
+const title =
+  "Cemeteries Near Me in Northwest Illinois | Monument Planning and Installation";
+const description =
+  "Searching for cemeteries near me in northwest Illinois? Ivey Monuments helps families plan, design, and install cemetery memorials with local cemetery rule compliance.";
+
+const pageUrl = "https://iveymonuments.com/services/cemeteries-near-me";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://iveymonuments.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://iveymonuments.com/services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Cemeteries Near Me",
+      item: pageUrl,
+    },
+  ],
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Cemetery Monument Planning and Installation",
+  serviceType: "Cemetery monument planning, compliance, and installation",
+  url: pageUrl,
+  description:
+    "Planning and installation support for cemetery memorials, including section rules, foundation requirements, and monument lettering.",
+  provider: {
+    "@id": localBusinessId,
+  },
+  areaServed: serviceAreas.map((area) => ({
+    "@type": "AdministrativeArea",
+    name: area,
+  })),
+};
+---
+
+<Layout title={title} description={description} structuredData={[localBusinessSchema, breadcrumbSchema, serviceSchema]}>
+  <div class="min-h-screen bg-slate-50">
+    <Navbar client:load />
+
+    <section
+      class="relative pt-32 pb-20 px-6 text-white"
+      style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);"
+    >
+      <div class="max-w-5xl mx-auto text-center">
+        <p class="text-amber-400 uppercase tracking-widest text-sm mb-4">Mt Carroll, Illinois</p>
+        <h1 class="text-4xl md:text-5xl font-serif mb-6">Cemeteries Near Me</h1>
+        <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+          If you are comparing cemeteries near me and need help with monument rules, foundation specs, and memorial design, our team can guide the full process with local experience.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-serif mb-5 text-slate-900">Cemetery Support Services</h2>
+        <p class="text-slate-700 mb-8 max-w-4xl">
+          Different cemeteries have different monument policies. We coordinate directly with cemetery offices so your memorial meets section rules before production begins.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="rounded-xl border border-slate-200 p-6">
+            <h3 class="text-xl font-semibold mb-2">Section and Size Verification</h3>
+            <p class="text-slate-700">
+              We verify allowable monument dimensions, profile type, and material requirements for the specific lot location.
+            </p>
+          </article>
+          <article class="rounded-xl border border-slate-200 p-6">
+            <h3 class="text-xl font-semibold mb-2">Foundation and Setting Coordination</h3>
+            <p class="text-slate-700">
+              Our team aligns delivery and installation with cemetery procedures and prepares for a stable, long-lasting setting.
+            </p>
+          </article>
+          <article class="rounded-xl border border-slate-200 p-6">
+            <h3 class="text-xl font-semibold mb-2">Inscription Planning</h3>
+            <p class="text-slate-700">
+              We help families plan current and future inscriptions so names, dates, and epitaphs remain balanced over time.
+            </p>
+          </article>
+          <article class="rounded-xl border border-slate-200 p-6">
+            <h3 class="text-xl font-semibold mb-2">Lettering and Restoration Work</h3>
+            <p class="text-slate-700">
+              For existing stones, we can evaluate cleaning, re-inking, and lettering updates where cemetery policies allow.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-slate-100">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-serif mb-5 text-slate-900">Cemeteries We Commonly Serve</h2>
+        <p class="text-slate-700 mb-8 max-w-4xl">
+          We regularly complete monument projects in the following counties and nearby communities across northwest Illinois.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {cemeteryCoverage.map((entry) => (
+            <article class="rounded-xl border border-slate-200 bg-white p-6">
+              <h3 class="text-xl font-semibold mb-3">{entry.county}</h3>
+              <ul class="space-y-2">
+                {entry.cemeteries.map((cemetery) => (
+                  <li class="text-slate-700 flex gap-2">
+                    <span style="color: var(--brand-primary);">•</span>
+                    {cemetery}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-3xl font-serif mb-5 text-slate-900">What to Bring to Your Consultation</h2>
+          <ul class="space-y-3 text-slate-700">
+            <li class="flex gap-2">
+              <span style="color: var(--brand-primary);">•</span>
+              Cemetery name and section/lot details (if available)
+            </li>
+            <li class="flex gap-2">
+              <span style="color: var(--brand-primary);">•</span>
+              Preferred monument style and inscription ideas
+            </li>
+            <li class="flex gap-2">
+              <span style="color: var(--brand-primary);">•</span>
+              Any family timeline needs for ceremonies or unveiling
+            </li>
+            <li class="flex gap-2">
+              <span style="color: var(--brand-primary);">•</span>
+              Budget range so we can recommend the best options quickly
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-3xl font-serif mb-5 text-slate-900">Related Services</h2>
+          <p class="text-slate-700 mb-5">
+            Need a new memorial as part of your cemetery planning? Start with our dedicated headstone service page.
+          </p>
+          <a
+            href="/services/headstones-near-me"
+            class="inline-flex px-6 py-3 rounded-lg text-white transition-opacity hover:opacity-90"
+            style="background-color: var(--brand-primary);"
+          >
+            Explore Headstones Near Me
+          </a>
+          <p class="text-slate-600 mt-6">
+            You can also browse completed work in the
+            <a href="/gallery" class="underline"> monument gallery</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="py-16 px-6 text-center"
+      style="background: linear-gradient(135deg, var(--brand-gradient-from), var(--brand-gradient-to));"
+    >
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-serif mb-4 text-slate-900">Need Cemetery-Specific Help?</h2>
+        <p class="text-slate-700 mb-8">
+          Call <a href="tel:815-244-3034" class="underline">(815) 244-3034</a> and we can review your cemetery requirements with you.
+        </p>
+        <p class="text-slate-700 mb-6 text-sm">
+          For directions, use our <a href={googleMapsUrl} class="underline" target="_blank" rel="noopener noreferrer">Google Maps business profile</a>.
+        </p>
+        <a
+          href="/contact"
+          class="px-6 py-3 rounded-lg text-white transition-opacity hover:opacity-90 inline-flex"
+          style="background-color: var(--brand-primary);"
+        >
+          Contact Ivey Monuments
+        </a>
+      </div>
+    </section>
+
+    <Footer client:load />
+  </div>
+</Layout>

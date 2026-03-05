@@ -173,6 +173,23 @@ export function ContactPage() {
                 <p className="text-slate-500 text-sm mt-4">
                   Don't see your area? Call us — we serve families throughout northwest Illinois.
                 </p>
+                <div className="mt-6 space-y-2">
+                  <p className="text-sm font-semibold text-slate-700">Popular service pages</p>
+                  <a
+                    href="/services/headstones-near-me"
+                    className="block text-sm hover:underline"
+                    style={{ color: 'var(--brand-primary)' }}
+                  >
+                    Headstones Near Me
+                  </a>
+                  <a
+                    href="/services/cemeteries-near-me"
+                    className="block text-sm hover:underline"
+                    style={{ color: 'var(--brand-primary)' }}
+                  >
+                    Cemeteries Near Me
+                  </a>
+                </div>
               </div>
             </div>
           </div>

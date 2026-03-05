@@ -1,22 +1,31 @@
-import { Heart, Hammer, Palette, Clock } from 'lucide-react';
+import { Heart, Hammer, Palette } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import IconWrapper from './ui/IconWrapper';
 
 const services = [
   {
     icon: Heart,
-    title: 'Memorial Monuments',
-    description: 'Custom-designed monuments in granite, marble, and bronze to honor your loved ones with dignity and grace.',
+    title: 'Headstones Near Me',
+    description:
+      'Custom-designed granite headstones with inscription planning, cemetery rule checks, and professional installation.',
+    href: '/services/headstones-near-me',
+    cta: 'Explore Headstones',
   },
   {
     icon: Hammer,
-    title: 'Custom Engraving',
-    description: 'Expert stone engraving services including names, dates, epitaphs, religious symbols, and custom artwork.',
+    title: 'Cemeteries Near Me',
+    description:
+      'Local cemetery monument support for sizing, section requirements, foundations, lettering, and setting.',
+    href: '/services/cemeteries-near-me',
+    cta: 'View Cemetery Coverage',
   },
   {
     icon: Palette,
     title: 'Personalized Design',
-    description: 'Work with our designers to create a unique memorial that reflects your loved one\'s personality and legacy.',
+    description:
+      'Use our online design tool to create a memorial that reflects your loved one\'s life and legacy.',
+    href: 'https://lastingmemori.com/designer/ivey-monuments',
+    cta: 'Start Designing Online',
   },
 ];
 
@@ -39,6 +48,13 @@ export function Services() {
                   <IconWrapper icon={service.icon} />
                   <h3 className="text-xl mb-3">{service.title}</h3>
                   <p className="text-slate-600">{service.description}</p>
+                  <a
+                    href={service.href}
+                    className="inline-flex mt-4 text-sm font-semibold"
+                    style={{ color: 'var(--brand-primary)' }}
+                  >
+                    {service.cta}
+                  </a>
                 </CardContent>
               </Card>
             );

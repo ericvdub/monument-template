@@ -19,7 +19,7 @@ export function Navbar() {
 
   const navLinks = [
     { href: '/about', label: 'About', isAnchor: false },
-    { href: '/#services', label: 'Services', isAnchor: true },
+    { href: '/services', label: 'Services', isAnchor: false },
     { href: '/gallery', label: 'Gallery', isAnchor: false },
     { href: '/materials', label: 'Materials', isAnchor: false },
     { href: '/contact', label: 'Contact', isAnchor: false },

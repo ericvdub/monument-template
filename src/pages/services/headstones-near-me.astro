@@ -1,0 +1,213 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Navbar } from "../../components/Navbar";
+import { Footer } from "../../components/Footer";
+import {
+  googleMapsUrl,
+  localBusinessId,
+  localBusinessSchema,
+  serviceAreas,
+} from "../../data/localSeo";
+
+const title =
+  "Headstones Near Me in Northwest Illinois | Custom Granite Headstones";
+const description =
+  "Looking for headstones near me? Ivey Monuments designs, engraves, and installs custom granite headstones from Mt Carroll, IL across northwest Illinois.";
+
+const pageUrl = "https://iveymonuments.com/services/headstones-near-me";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://iveymonuments.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://iveymonuments.com/services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Headstones Near Me",
+      item: pageUrl,
+    },
+  ],
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Headstones Near Me",
+  serviceType: "Custom headstone design, engraving, and installation",
+  url: pageUrl,
+  description:
+    "Custom granite headstones, slants, flat markers, and companion monuments with cemetery-compliant installation across northwest Illinois.",
+  provider: {
+    "@id": localBusinessId,
+  },
+  areaServed: serviceAreas.map((area) => ({
+    "@type": "AdministrativeArea",
+    name: area,
+  })),
+};
+---
+
+<Layout title={title} description={description} structuredData={[localBusinessSchema, breadcrumbSchema, serviceSchema]}>
+  <div class="min-h-screen bg-slate-50">
+    <Navbar client:load />
+
+    <section
+      class="relative pt-32 pb-20 px-6 text-white"
+      style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);"
+    >
+      <div class="max-w-5xl mx-auto text-center">
+        <p class="text-amber-400 uppercase tracking-widest text-sm mb-4">Serving Northwest Illinois</p>
+        <h1 class="text-4xl md:text-5xl font-serif mb-6">Headstones Near Me</h1>
+        <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+          Ivey Monuments helps families who are searching for headstones near me with custom designs, clear pricing guidance, and trusted installation support from start to finish.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-serif mb-5 text-slate-900">Headstone Types We Build</h2>
+        <p class="text-slate-700 mb-8 max-w-4xl">
+          Every memorial is custom-ordered and built for long-term durability in Illinois weather. We help you match size, finish, and lettering style to both family preferences and cemetery requirements.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="border border-slate-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">Upright Headstones</h3>
+            <p class="text-slate-700">
+              Traditional upright monuments with custom shape work, family names, carved symbols, and personal inscriptions.
+            </p>
+          </article>
+          <article class="border border-slate-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">Flat Markers and Bevels</h3>
+            <p class="text-slate-700">
+              Ground-level or low-profile memorials that satisfy cemeteries with strict height rules while still allowing personalized engraving.
+            </p>
+          </article>
+          <article class="border border-slate-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">Slants and Companion Monuments</h3>
+            <p class="text-slate-700">
+              Shared memorial layouts for couples and families, including front-and-back inscription planning for future dates.
+            </p>
+          </article>
+          <article class="border border-slate-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold mb-2">Custom Artwork and Lettering</h3>
+            <p class="text-slate-700">
+              Deep-cut lettering, etched portraits, religious symbols, military emblems, and highly personalized designs prepared in our digital design system.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-slate-100">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-3xl font-serif mb-5 text-slate-900">How Our Process Works</h2>
+          <ol class="space-y-4 text-slate-700">
+            <li class="flex gap-3">
+              <span class="font-semibold" style="color: var(--brand-primary);">1.</span>
+              Consultation and size planning based on cemetery section rules.
+            </li>
+            <li class="flex gap-3">
+              <span class="font-semibold" style="color: var(--brand-primary);">2.</span>
+              Design mockup review with your inscription, dates, and artwork.
+            </li>
+            <li class="flex gap-3">
+              <span class="font-semibold" style="color: var(--brand-primary);">3.</span>
+              Stone production and engraving with final approval before install.
+            </li>
+            <li class="flex gap-3">
+              <span class="font-semibold" style="color: var(--brand-primary);">4.</span>
+              Delivery and cemetery-compliant installation on a prepared foundation.
+            </li>
+          </ol>
+        </div>
+        <div>
+          <h2 class="text-3xl font-serif mb-5 text-slate-900">Service Area</h2>
+          <p class="text-slate-700 mb-4">
+            Our shop is in Mt Carroll, and we regularly install headstones across nearby counties:
+          </p>
+          <ul class="space-y-2">
+            {serviceAreas.map((area) => (
+              <li class="flex gap-2 text-slate-700">
+                <span style="color: var(--brand-primary);">•</span>
+                {area}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 px-6 bg-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-serif mb-5 text-slate-900">What Families Ask Most</h2>
+        <div class="space-y-5">
+          <article class="border border-slate-200 rounded-lg p-5">
+            <h3 class="text-xl font-semibold mb-2">How long does a custom headstone take?</h3>
+            <p class="text-slate-700">
+              Timeframes vary by design complexity and stone availability. We provide realistic timelines up front and keep you updated at each milestone.
+            </p>
+          </article>
+          <article class="border border-slate-200 rounded-lg p-5">
+            <h3 class="text-xl font-semibold mb-2">Can you handle cemetery approvals?</h3>
+            <p class="text-slate-700">
+              Yes. We verify dimensions, materials, and installation requirements with the cemetery before fabrication starts.
+            </p>
+          </article>
+          <article class="border border-slate-200 rounded-lg p-5">
+            <h3 class="text-xl font-semibold mb-2">Do you offer online design help?</h3>
+            <p class="text-slate-700">
+              Yes. You can start with our online designer and then finalize details with our team before the monument is cut and engraved.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="py-16 px-6 text-center"
+      style="background: linear-gradient(135deg, var(--brand-gradient-from), var(--brand-gradient-to));"
+    >
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-serif mb-4 text-slate-900">Ready to Start a Headstone Design?</h2>
+        <p class="text-slate-700 mb-8">
+          Call <a href="tel:815-244-3034" class="underline">(815) 244-3034</a> or visit the
+          <a href="/contact" class="underline"> contact page</a> for a free consultation.
+        </p>
+        <p class="text-slate-700 mb-6 text-sm">
+          Local listing: <a href={googleMapsUrl} class="underline" target="_blank" rel="noopener noreferrer">find us on Google Maps</a>.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a
+            href="https://lastingmemori.com/designer/ivey-monuments"
+            class="px-6 py-3 rounded-lg text-white transition-opacity hover:opacity-90"
+            style="background-color: var(--brand-primary);"
+          >
+            Start Designing Online
+          </a>
+          <a
+            href="/gallery"
+            class="px-6 py-3 rounded-lg border border-slate-400 text-slate-800 hover:bg-slate-100 transition-colors"
+          >
+            View Completed Monuments
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <Footer client:load />
+  </div>
+</Layout>

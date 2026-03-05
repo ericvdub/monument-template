@@ -25,7 +25,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/#services"
+                  href="/services"
                   className="hover:text-white transition-colors"
                 >
                   Services

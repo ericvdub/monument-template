@@ -1,6 +1,6 @@
 export const localBusinessId = "https://iveymonuments.com/#local-business";
 export const googleMapsUrl =
-  "https://maps.google.com/?q=204+W+Market+St+Mt+Carroll+IL+61053";
+  "https://maps.app.goo.gl/2SU9LYN2vjZGx93y8";
 
 export const serviceAreas = [
   "Carroll County, Illinois",

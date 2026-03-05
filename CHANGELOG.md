@@ -5,8 +5,8 @@
 ### Added
 - New local SEO service hub page at `/services`.
 - New intent-focused pages:
-  - `/services/headstones-near-me`
-  - `/services/cemeteries-near-me`
+  - `/services/headstones-memorials`
+  - `/services/cemetery-coverage`
 - Shared local SEO data module with:
   - service-area coverage
   - cemetery coverage lists

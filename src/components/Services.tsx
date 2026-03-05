@@ -5,18 +5,18 @@ import IconWrapper from './ui/IconWrapper';
 const services = [
   {
     icon: Heart,
-    title: 'Headstones Near Me',
+    title: 'Headstones & Memorials',
     description:
       'Custom-designed granite headstones with inscription planning, cemetery rule checks, and professional installation.',
-    href: '/services/headstones-near-me',
+    href: '/services/headstones-memorials',
     cta: 'Explore Headstones',
   },
   {
     icon: Hammer,
-    title: 'Cemeteries Near Me',
+    title: 'Cemeteries We Service',
     description:
       'Local cemetery monument support for sizing, section requirements, foundations, lettering, and setting.',
-    href: '/services/cemeteries-near-me',
+    href: '/services/cemetery-coverage',
     cta: 'View Cemetery Coverage',
   },
   {
@@ -43,20 +43,21 @@ export function Services() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => {
             return (
-              <Card key={index} className="border-slate-200 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6">
-                  <IconWrapper icon={service.icon} />
-                  <h3 className="text-xl mb-3">{service.title}</h3>
-                  <p className="text-slate-600">{service.description}</p>
-                  <a
-                    href={service.href}
-                    className="inline-flex mt-4 text-sm font-semibold"
-                    style={{ color: 'var(--brand-primary)' }}
-                  >
-                    {service.cta}
-                  </a>
-                </CardContent>
-              </Card>
+              <a key={index} href={service.href} className="block h-full">
+                <Card className="h-full border-slate-200 hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-6">
+                    <IconWrapper icon={service.icon} />
+                    <h3 className="text-xl mb-3">{service.title}</h3>
+                    <p className="text-slate-600">{service.description}</p>
+                    <span
+                      className="inline-flex mt-4 text-sm font-semibold"
+                      style={{ color: 'var(--brand-primary)' }}
+                    >
+                      {service.cta}
+                    </span>
+                  </CardContent>
+                </Card>
+              </a>
             );
           })}
         </div>

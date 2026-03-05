@@ -21,12 +21,13 @@ interface GalleryItem {
 
 type MemorialContext = 'Individual' | 'Companion';
 
-const categories = ['All', 'Upright Monuments', 'Flat Markers', 'Benches', 'Custom Monuments', 'Custom Stone Signage'];
+const categories = ['All', 'Upright Monuments', 'Flat Markers', 'Slants', 'Benches', 'Custom Monuments', 'Custom Stone Signage'];
 const contexts: MemorialContext[] = ['Individual', 'Companion'];
 const categoryIndex = new Map(categories.map((category, index) => [category, index]));
 const folderToCategory: Record<string, string> = {
   upright: 'Upright Monuments',
   'flat-markers': 'Flat Markers',
+  slants: 'Slants',
   benches: 'Benches',
   custom: 'Custom Monuments',
   'custom-stone-signage': 'Custom Stone Signage',
@@ -55,7 +56,8 @@ const createBaseLabel = (filename: string): string => {
 
 const cleanLabelForCategory = (label: string, category: string): string => {
   if (category === 'Benches') return label.replace(/^Bench\s+/i, '');
-  if (category === 'Flat Markers') return label.replace(/^(Flat|Slant|Bevel)\s+/i, '');
+  if (category === 'Flat Markers') return label.replace(/^(Flat|Bevel)\s+/i, '');
+  if (category === 'Slants') return label.replace(/^Slant\s+/i, '');
   if (category === 'Upright Monuments') return label.replace(/^(Upright|Boulder)\s+/i, '');
   return label;
 };
@@ -74,6 +76,8 @@ const createAltText = (
     ? 'upright monument'
     : category === 'Flat Markers'
       ? 'flat marker'
+      : category === 'Slants'
+        ? 'slant marker'
       : category === 'Benches'
         ? 'memorial bench'
         : category === 'Custom Monuments'
@@ -333,7 +337,7 @@ export function GalleryPage({ images }: { images: RawImageData[] }) {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           {isContextEnabled && (
-            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="mb-6 flex justify-center">
               <div className="inline-flex w-fit rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
                 {contexts.map((context) => {
                   const count = getFiltered(activeTab, context).length;

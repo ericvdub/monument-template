@@ -5,6 +5,7 @@ import logoImage from '../assets/logo/Ivey_Logo.png';
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const startDesignHref = 'https://lastingmemori.com/designer/ivey-monuments';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +18,6 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home', isAnchor: false },
     { href: '/about', label: 'About', isAnchor: false },
     { href: '/#services', label: 'Services', isAnchor: true },
     { href: '/gallery', label: 'Gallery', isAnchor: false },
@@ -59,14 +59,16 @@ export function Navbar() {
         }`}
         style={isScrolled ? { backgroundColor: 'var(--brand-primary-bg)' } : undefined}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className={`max-w-7xl mx-auto px-6 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-5'}`}>
           <div className="flex items-center justify-between">
             {/* Logo and Company Name */}
-            <div className={`flex items-center gap-3 transition-opacity duration-300 ${
-              isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}>
+            <a
+              href="/"
+              onClick={handleLinkClick}
+              className={`flex items-center transition-all duration-300 ${isScrolled ? 'gap-3' : 'gap-4 md:gap-5'}`}
+            >
               <div
-                className="w-10 h-10 rounded-lg overflow-hidden"
+                className={`rounded-lg overflow-hidden transition-all duration-300 ${isScrolled ? 'w-10 h-10' : 'w-14 h-14 md:w-16 md:h-16'}`}
                 style={{ mixBlendMode: isScrolled ? 'multiply' : 'normal' }}
               >
                 <img
@@ -76,16 +78,20 @@ export function Navbar() {
                 />
               </div>
               <div>
-                <h1 className={`text-xl font-serif transition-colors ${
+                <h1 className={`font-serif leading-tight transition-all duration-300 ${
+                  isScrolled ? 'text-2xl' : 'text-2xl md:text-3xl lg:text-4xl'
+                } ${
                   isScrolled ? 'text-slate-900' : 'text-white'
                 }`}>
                   Ivey Monuments
                 </h1>
-				<p className="text-sm text-slate-500">
+				<p className={`transition-all duration-300 ${
+                  isScrolled ? 'text-sm text-slate-500' : 'text-base md:text-lg text-slate-300'
+                }`}>
                   Serving Illinois Since 1875
                 </p>
               </div>
-            </div>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
@@ -101,6 +107,20 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href={startDesignHref}
+                onClick={handleLinkClick}
+                className="px-4 py-2 rounded-lg text-white font-medium shadow-md transition-all"
+                style={{ backgroundColor: 'var(--brand-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = '0.9';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = '1';
+                }}
+              >
+                Start Designing
+              </a>
               <a
                 href="tel:815-244-3034"
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
@@ -175,6 +195,16 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
+            <a
+              href={startDesignHref}
+              onClick={handleLinkClick}
+              className="flex items-center justify-center px-4 py-3 text-white rounded-lg transition-colors font-medium"
+              style={{ backgroundColor: 'var(--brand-primary)' }}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+            >
+              Start Designing
+            </a>
             <a
               href="tel:815-244-3034"
               onClick={handleLinkClick}

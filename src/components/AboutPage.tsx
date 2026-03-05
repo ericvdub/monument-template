@@ -176,7 +176,7 @@ export function AboutPage() {
             <h2 className="text-4xl mb-2 font-serif">Through the Years</h2>
             <p className="text-slate-500 text-sm">Click any photo to enlarge</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {photos.map((photo, index) => (
               <button
                 key={index}

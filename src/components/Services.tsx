@@ -43,17 +43,20 @@ export function Services() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => {
             return (
-              <a key={index} href={service.href} className="block h-full">
+              <a key={index} href={service.href} className="group block h-full">
                 <Card className="h-full border-slate-200 hover:shadow-lg transition-shadow">
-                  <CardContent className="pt-6">
+                  <CardContent className="h-full pt-6 flex flex-col">
                     <IconWrapper icon={service.icon} />
                     <h3 className="text-xl mb-3">{service.title}</h3>
-                    <p className="text-slate-600">{service.description}</p>
+                    <p className="text-slate-600 flex-1">{service.description}</p>
                     <span
-                      className="inline-flex mt-4 text-sm font-semibold"
+                      className="inline-flex items-center gap-2 mt-4 text-sm font-semibold"
                       style={{ color: 'var(--brand-primary)' }}
                     >
-                      {service.cta}
+                      <span>{service.cta}</span>
+                      <span className="inline-block translate-x-0 group-hover:translate-x-1.5 transition-transform duration-200">
+                        &rarr;
+                      </span>
                     </span>
                   </CardContent>
                 </Card>

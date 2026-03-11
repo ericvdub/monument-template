@@ -1,26 +1,27 @@
 import { Award, Users, MapPin, Clock } from 'lucide-react';
 import IconWrapper from './ui/IconWrapper';
+import { siteConfig } from '../config/site';
 
 const stats = [
   {
     icon: Clock,
-    number: '145+',
+    number: siteConfig.company.yearsInBusiness,
     label: 'Years in Business',
   },
   {
     icon: Users,
-    number: '5,000+',
+    number: siteConfig.company.familiesServed,
     label: 'Families Served',
   },
   {
     icon: Award,
-    number: '100%',
+    number: siteConfig.company.qualityGuarantee,
     label: 'Quality Guarantee',
   },
   {
     icon: MapPin,
-    number: '1',
-    label: 'Illinois Location',
+    number: siteConfig.company.locationsCount,
+    label: siteConfig.company.locationLabel,
   },
 ];
 
@@ -30,17 +31,11 @@ export function About() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl mb-6 font-serif">Serving Illinois Since 1875</h2>
+            <h2 className="text-4xl mb-6 font-serif">{siteConfig.about.heading}</h2>
             <div className="space-y-4 text-slate-700">
-              <p>
-                Ivey Monuments has been serving Illinois families for over a century. Founded in 1875 in Mt Carroll, our family business continues to uphold the values of quality craftsmanship, personal service, and compassionate care.
-              </p>
-              <p>
-                We understand that choosing a memorial is a deeply personal decision. Our experienced team works closely with each family to create a lasting tribute that truly honors their loved one's memory and legacy.
-              </p>
-              <p>
-                From traditional granite monuments to custom-designed memorials, we use only the finest materials and time-honored techniques to ensure your monument stands the test of time.
-              </p>
+              <p>{siteConfig.about.paragraphs[0]}</p>
+              <p>{siteConfig.about.paragraphs[1]}</p>
+              <p>{siteConfig.about.paragraphs[2]}</p>
             </div>
           </div>
 

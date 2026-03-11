@@ -7,7 +7,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://iveymonuments.com',
+  // Update this to your domain (must match siteConfig.urls.siteUrl)
+  site: 'https://www.examplemonuments.com',
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

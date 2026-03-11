@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { AboutPage } from '../components/AboutPage';
+import { siteConfig } from '../config/site';
 import "../styles/global.css";
 ---
 
 <Layout
-  title="About Ivey Monuments | Serving Illinois Since 1875 | Mt Carroll, IL"
-  description="Learn the story of Ivey Monuments — a family-owned monument company serving Carroll County, Illinois since 1875. Quality granite memorials with a 100% satisfaction guarantee."
+  title={siteConfig.seo.aboutTitle}
+  description={siteConfig.seo.aboutDescription}
 >
   <AboutPage client:load />
 </Layout>

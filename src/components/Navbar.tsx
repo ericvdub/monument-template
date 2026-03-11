@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import logoImage from '../assets/logo/Ivey_Logo.png';
+import logoImage from '../assets/logo/logo.png';
+import { siteConfig } from '../config/site';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const startDesignHref = 'https://lastingmemori.com/designer/ivey-monuments';
+  const startDesignHref = siteConfig.urls.designerUrl;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +74,7 @@ export function Navbar() {
               >
                 <img
                   src={logoImage.src}
-                  alt="Ivey Monuments Logo"
+                  alt={`${siteConfig.company.name} Logo`}
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -83,12 +84,12 @@ export function Navbar() {
                 } ${
                   isScrolled ? 'text-slate-900' : 'text-white'
                 }`}>
-                  Ivey Monuments
+                  {siteConfig.company.name}
                 </h1>
 				<p className={`transition-all duration-300 ${
                   isScrolled ? 'text-sm text-slate-500' : 'text-base md:text-lg text-slate-300'
                 }`}>
-                  Serving Illinois Since 1875
+                  {siteConfig.company.tagline}
                 </p>
               </div>
             </a>
@@ -122,7 +123,7 @@ export function Navbar() {
                 Start Designing
               </a>
               <a
-                href="tel:815-244-3034"
+                href={siteConfig.contact.phoneTel}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                   isScrolled
                     ? 'text-white'
@@ -141,7 +142,7 @@ export function Navbar() {
                 }}
               >
                 <Phone className="w-4 h-4" />
-                <span>(815) 244-3034</span>
+                <span>{siteConfig.contact.phone}</span>
               </a>
             </div>
 
@@ -206,7 +207,7 @@ export function Navbar() {
               Start Designing
             </a>
             <a
-              href="tel:815-244-3034"
+              href={siteConfig.contact.phoneTel}
               onClick={handleLinkClick}
               className="flex items-center gap-2 px-4 py-3 text-white rounded-lg transition-colors mt-4"
               style={{ backgroundColor: 'var(--brand-primary)' }}
@@ -214,7 +215,7 @@ export function Navbar() {
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
               <Phone className="w-5 h-5" />
-              <span>(815) 244-3034</span>
+              <span>{siteConfig.contact.phone}</span>
             </a>
           </div>
         </div>

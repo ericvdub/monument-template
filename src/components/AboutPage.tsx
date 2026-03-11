@@ -4,21 +4,17 @@ import { Card, CardContent } from './ui/card';
 import IconWrapper from './ui/IconWrapper';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { siteConfig } from '../config/site';
 
-import drakeMike from '../assets/about/ivy-Drake-Mike.jpg';
-import originalStorefront from '../assets/about/ivey-originalstorefront.webp';
-import storeThen from '../assets/about/iveystore-then.webp';
-import johnIvey from '../assets/about/john-ivey.webp';
-import storeNow from '../assets/about/iveystore-now.jpg';
-import storeSide from '../assets/about/storeside.webp';
+import teamPhoto from '../assets/about/team-photo.jpg';
+import originalStorefront from '../assets/about/original-storefront.webp';
+import storeThen from '../assets/about/store-then.webp';
+import founderPortrait from '../assets/about/founder-portrait.webp';
+import storeNow from '../assets/about/store-now.jpg';
+import storeSide from '../assets/about/store-side.webp';
 
-const photos = [
-  { src: originalStorefront.src, alt: 'Ivey & Sons original storefront', caption: 'Ivey & Sons — the original storefront', year: 'c. 1900s' },
-  { src: storeThen.src, alt: 'Ivey & Sons Monuments mid-century', caption: 'Ivey & Sons Monuments, Mount Carroll', year: 'Mid-century' },
-  { src: johnIvey.src, alt: 'John Ivey', caption: 'John Ivey', year: '1947' },
-  { src: storeNow.src, alt: 'Ivey Monuments storefront today', caption: '204 W. Market St. — today', year: '2024' },
-  { src: storeSide.src, alt: 'Ivey Monuments yard today', caption: 'The monument yard today', year: '2024' },
-];
+const photoSrcs = [originalStorefront.src, storeThen.src, founderPortrait.src, storeNow.src, storeSide.src];
+const photos = siteConfig.aboutPage.photos.map((p, i) => ({ ...p, src: photoSrcs[i] }));
 
 const values = [
   {
@@ -41,15 +37,7 @@ const values = [
   },
 ];
 
-const timeline = [
-  { year: '1875',    event: 'Founded in Galena, Illinois by George W. Ivey and J.P. Vincent.' },
-  { year: '1898–99', event: 'Relocated to Mount Carroll to better serve surrounding communities.' },
-  { year: '1914',    event: 'Moved into the current location at 204 W. Market St. — still our home today.' },
-  { year: '1947',    event: 'John Ivey takes over operations, leading the business for more than three decades.' },
-  { year: '1988',    event: 'Ken Lego purchases Ivey Monuments, preserving its legacy and community ties.' },
-  { year: '1991',    event: 'Diane joins the office staff, bringing warmth and dedication to every client interaction.' },
-  { year: '2024',    event: 'Mike Wawro purchases Ivey Monuments. Ken and Diane continue managing day-to-day operations.' },
-];
+const timeline = siteConfig.aboutPage.timeline;
 
 export function AboutPage() {
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -79,10 +67,10 @@ export function AboutPage() {
         style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">Serving Illinois Since 1875</p>
+          <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">{siteConfig.aboutPage.heroSubtitle}</p>
           <h1 className="text-5xl font-serif mb-6">Our Story</h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            For 150 years, Ivey Monuments has honored the lives of those we've lost — with granite, with care, and with the deep roots of an Illinois family business.
+            {siteConfig.aboutPage.heroDescription}
           </p>
         </div>
       </section>
@@ -92,23 +80,17 @@ export function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl mb-6 font-serif">A 150-Year Legacy</h2>
+              <h2 className="text-4xl mb-6 font-serif">{siteConfig.aboutPage.storyHeading}</h2>
               <div className="space-y-4 text-slate-700">
-                <p>
-                  Ivey Monuments was founded in 1875 in Galena, Illinois by George W. Ivey and J.P. Vincent. Within a few decades the business relocated to Mount Carroll, where it has remained ever since — operating out of the same building at 204 W. Market St. since 1914.
-                </p>
-                <p>
-                  In 1988, Ken Lego purchased the business, carrying on a personal connection that began in his childhood. In 2024, Mike Wawro became the new owner, while Ken and Diane continue managing operations — ensuring the same familiar service that families have counted on for generations.
-                </p>
-                <p>
-                  Today, Ivey Monuments offers a modern computer design system for personalized stone layouts, a full range of granite options, and the equipment to handle monument relocation. The tradition of craftsmanship and compassion is as strong as ever.
-                </p>
+                <p>{siteConfig.aboutPage.storyParagraphs[0]}</p>
+                <p>{siteConfig.aboutPage.storyParagraphs[1]}</p>
+                <p>{siteConfig.aboutPage.storyParagraphs[2]}</p>
               </div>
             </div>
             <div className="rounded-xl overflow-hidden shadow-lg">
               <img
-                src={drakeMike.src}
-                alt="The Ivey Monuments team"
+                src={teamPhoto.src}
+                alt={`The ${siteConfig.company.name} team`}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -122,7 +104,7 @@ export function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-4xl mb-4 font-serif">Our Values</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              The principles that have guided Ivey Monuments for over a century.
+              {siteConfig.aboutPage.valuesDescription}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

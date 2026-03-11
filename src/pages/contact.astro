@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { ContactPage } from '../components/ContactPage';
+import { siteConfig } from '../config/site';
 import "../styles/global.css";
 ---
 
 <Layout
-  title="Contact Ivey Monuments | Mt Carroll, IL | (815) 244-3034"
-  description="Contact Ivey Monuments in Mt Carroll, IL. Call (815) 244-3034 or send a message for a free monument consultation. Serving Carroll County and northwest Illinois."
+  title={siteConfig.seo.contactTitle}
+  description={siteConfig.seo.contactDescription}
 >
   <ContactPage client:load />
 </Layout>

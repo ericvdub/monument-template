@@ -1,6 +1,7 @@
 import { Heart, Hammer, Palette } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import IconWrapper from './ui/IconWrapper';
+import { siteConfig } from '../config/site';
 
 const services = [
   {
@@ -24,7 +25,7 @@ const services = [
     title: 'Personalized Design',
     description:
       'Use our online design tool to create a memorial that reflects your loved one\'s life and legacy.',
-    href: 'https://lastingmemori.com/designer/ivey-monuments',
+    href: siteConfig.urls.designerUrl,
     cta: 'Start Designing Online',
   },
 ];

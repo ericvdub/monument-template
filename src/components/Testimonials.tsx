@@ -1,23 +1,8 @@
 import { Quote } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
+import { siteConfig } from '../config/site';
 
-const testimonials = [
-  {
-    name: "Sarah Johnson",
-    location: "Mt Carroll, IL",
-    text: "The team at Ivey Monuments helped us create a beautiful memorial for my father. They were patient, understanding, and the craftsmanship is exceptional. We couldn't be more grateful.",
-  },
-  {
-    name: "Michael and Linda Chen",
-    location: "Savanna, IL",
-    text: "From design to installation, everything was handled with professionalism and care. The monument is exactly what we envisioned. Thank you for honoring our mother's memory so beautifully.",
-  },
-  {
-    name: "Robert Martinez",
-    location: "Morrison, IL",
-    text: "I highly recommend Ivey Monuments. They restored my grandparents' headstone and it looks brand new. Their attention to detail and respect for family history is outstanding.",
-  },
-];
+const testimonials = siteConfig.testimonials.items;
 
 export function Testimonials() {
   return (
@@ -25,11 +10,10 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl mb-4 font-serif">
-            What Families Say
+            {siteConfig.testimonials.heading}
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            We're honored to serve Illinois families during their
-            time of need.
+            {siteConfig.testimonials.subheading}
           </p>
         </div>
 

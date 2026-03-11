@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { MaterialsGallery } from '../components/MaterialsGallery';
+import { siteConfig } from '../config/site';
 import "../styles/global.css";
 ---
 
 <Layout
-  title="Granite & Material Colors | Ivey Monuments | Mt Carroll, IL"
-  description="Explore granite colors and materials available from Ivey Monuments in Mt Carroll, IL — including Black, Gray, Pink, Blue Pearl, Red granite, marble, and bronze."
+  title={siteConfig.seo.materialsTitle}
+  description={siteConfig.seo.materialsDescription}
 >
   <MaterialsGallery client:load />
 </Layout>

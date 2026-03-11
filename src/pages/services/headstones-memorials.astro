@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { Navbar } from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
+import { siteConfig } from "../../config/site";
 import {
   googleMapsUrl,
   localBusinessId,
@@ -12,9 +13,9 @@ import {
 const title =
   "Headstones & Memorials in Northwest Illinois | Custom Granite Headstones";
 const description =
-  "Looking for headstones? Ivey Monuments designs, engraves, and installs custom granite headstones from Mt Carroll, IL across northwest Illinois.";
+  `Looking for headstones? ${siteConfig.company.name} designs, engraves, and installs custom granite headstones from ${siteConfig.contact.address.city}, ${siteConfig.contact.address.state} across northwest Illinois.`;
 
-const pageUrl = "https://iveymonuments.com/services/headstones-memorials";
+const pageUrl = `${siteConfig.urls.siteUrl}/services/headstones-memorials`;
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -24,13 +25,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://iveymonuments.com/",
+      item: `${siteConfig.urls.siteUrl}/`,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Services",
-      item: "https://iveymonuments.com/services",
+      item: `${siteConfig.urls.siteUrl}/services`,
     },
     {
       "@type": "ListItem",
@@ -68,10 +69,10 @@ const serviceSchema = {
       style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);"
     >
       <div class="max-w-5xl mx-auto text-center">
-        <p class="text-amber-400 uppercase tracking-widest text-sm mb-4">Serving Northwest Illinois</p>
+        <p class="text-amber-400 uppercase tracking-widest text-sm mb-4">{`Serving ${siteConfig.company.region}`}</p>
         <h1 class="text-4xl md:text-5xl font-serif mb-6">Headstones & Memorials</h1>
         <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
-          Ivey Monuments helps families who are searching for headstones & memorials with custom designs, clear pricing guidance, and trusted installation support from start to finish.
+          {`${siteConfig.company.name} helps families`} who are searching for headstones & memorials with custom designs, clear pricing guidance, and trusted installation support from start to finish.
         </p>
       </div>
     </section>
@@ -137,7 +138,7 @@ const serviceSchema = {
         <div>
           <h2 class="text-3xl font-serif mb-5 text-slate-900">Service Area</h2>
           <p class="text-slate-700 mb-4">
-            Our shop is in Mt Carroll, and we regularly install headstones across nearby counties:
+            {`Our shop is in ${siteConfig.contact.address.city}`}, and we regularly install headstones across nearby counties:
           </p>
           <ul class="space-y-2">
             {serviceAreas.map((area) => (
@@ -184,7 +185,7 @@ const serviceSchema = {
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl font-serif mb-4 text-slate-900">Ready to Start a Headstone Design?</h2>
         <p class="text-slate-700 mb-8">
-          Call <a href="tel:815-244-3034" class="underline">(815) 244-3034</a> or visit the
+          Call <a href={siteConfig.contact.phoneTel} class="underline">{siteConfig.contact.phone}</a> or visit the
           <a href="/contact" class="underline"> contact page</a> for a free consultation.
         </p>
         <p class="text-slate-700 mb-6 text-sm">
@@ -192,7 +193,7 @@ const serviceSchema = {
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <a
-            href="https://lastingmemori.com/designer/ivey-monuments"
+            href={siteConfig.urls.designerUrl}
             class="px-6 py-3 rounded-lg text-white transition-opacity hover:opacity-90"
             style="background-color: var(--brand-primary);"
           >

@@ -1,5 +1,6 @@
 import { Palette, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
+import { siteConfig } from '../config/site';
 
 export function OnlineDesignerCTA() {
   return (
@@ -10,10 +11,10 @@ export function OnlineDesignerCTA() {
         </div>
 
         <h2 className="text-4xl mb-4 font-serif text-slate-900">
-          Honor Their Story, Your Way
+          {siteConfig.designerCTA.heading}
         </h2>
         <p className="text-xl text-slate-700 mb-8 max-w-2xl mx-auto">
-          Creating a memorial shouldn't add stress. Design a tribute that truly reflects their spirit — from anywhere, with anyone who loved them. 
+          {siteConfig.designerCTA.description}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -23,7 +24,7 @@ export function OnlineDesignerCTA() {
             style={{ backgroundColor: 'var(--brand-primary)' }}
             onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-            onClick={() => window.open('https://lastingmemori.com/designer/ivey-monuments', '_blank')}
+            onClick={() => window.open(siteConfig.urls.designerUrl, '_blank')}
           >
             Explore Memorial Ideas
             <ArrowRight className="w-5 h-5" />
@@ -39,7 +40,7 @@ export function OnlineDesignerCTA() {
         </div>
 
         <p className="text-sm text-slate-500 mt-6">
-          No account required · Free to use · Bring your design to our Mt Carroll showroom
+          {siteConfig.designerCTA.footerNote}
         </p>
       </div>
     </section>

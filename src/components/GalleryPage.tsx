@@ -3,6 +3,7 @@ import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { siteConfig } from '../config/site';
 
 interface RawImageData {
   path: string;
@@ -328,7 +329,7 @@ export function GalleryPage({ images }: { images: RawImageData[] }) {
           <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">Our Work</p>
           <h1 className="text-5xl font-serif mb-6">Monument Gallery</h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Browse examples of the monuments and memorials we've crafted for families throughout Carroll County and northwest Illinois.
+            {`Browse examples of the monuments and memorials we've crafted for families throughout ${siteConfig.company.region}.`}
           </p>
         </div>
       </section>

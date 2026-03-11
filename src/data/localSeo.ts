@@ -1,68 +1,31 @@
-export const localBusinessId = "https://iveymonuments.com/#local-business";
-export const googleMapsUrl =
-  "https://maps.app.goo.gl/2SU9LYN2vjZGx93y8";
+import { siteConfig } from '../config/site';
 
-export const serviceAreas = [
-  "Carroll County, Illinois",
-  "Whiteside County, Illinois",
-  "Jo Daviess County, Illinois",
-  "Ogle County, Illinois",
-  "Lee County, Illinois",
-];
-
-export const cemeteryCoverage = [
-  {
-    county: "Carroll County",
-    cemeteries: [
-      "Mt Carroll Cemetery",
-      "Shannon Cemetery",
-      "Milledgeville Cemetery",
-      "Lanark Township Cemetery",
-    ],
-  },
-  {
-    county: "Whiteside County",
-    cemeteries: [
-      "Morrison City Cemetery",
-      "Tampico Cemetery",
-      "Prophetstown Cemetery",
-    ],
-  },
-  {
-    county: "Jo Daviess County",
-    cemeteries: ["Galena Township Cemetery", "Elizabeth Township Cemetery"],
-  },
-  {
-    county: "Ogle County",
-    cemeteries: ["Oregon Cemetery", "Rochelle Township Cemetery"],
-  },
-  {
-    county: "Lee County",
-    cemeteries: ["Dixon Cemetery", "Amboy Township Cemetery"],
-  },
-];
+export const localBusinessId = `${siteConfig.urls.siteUrl}/#local-business`;
+export const googleMapsUrl = siteConfig.contact.googleMapsUrl;
+export const serviceAreas = siteConfig.serviceAreas;
+export const cemeteryCoverage = siteConfig.cemeteryCoverage;
 
 export const localBusinessSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": localBusinessId,
-  name: "Ivey Monuments",
-  url: "https://iveymonuments.com",
+  name: siteConfig.company.name,
+  url: siteConfig.urls.siteUrl,
   hasMap: googleMapsUrl,
-  image: "https://iveymonuments.com/favicon.svg",
-  telephone: "+1-815-244-3034",
+  image: `${siteConfig.urls.siteUrl}/favicon.svg`,
+  telephone: siteConfig.contact.phoneRaw,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "204 W Market St",
-    addressLocality: "Mt Carroll",
-    addressRegion: "IL",
-    postalCode: "61053",
+    streetAddress: siteConfig.contact.address.street,
+    addressLocality: siteConfig.contact.address.city,
+    addressRegion: siteConfig.contact.address.state,
+    postalCode: siteConfig.contact.address.zip,
     addressCountry: "US",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 42.098543,
-    longitude: -89.974097,
+    latitude: siteConfig.contact.coordinates.latitude,
+    longitude: siteConfig.contact.coordinates.longitude,
   },
   areaServed: serviceAreas.map((area) => ({
     "@type": "AdministrativeArea",
@@ -72,8 +35,8 @@ export const localBusinessSchema: Record<string, unknown> = {
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "10:00",
-      closes: "14:00",
+      opens: "09:00",
+      closes: "17:00",
     },
   ],
 };

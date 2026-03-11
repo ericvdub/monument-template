@@ -4,6 +4,7 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card, CardContent } from './ui/card';
 import IconWrapper from './ui/IconWrapper';
+import { siteConfig } from '../config/site';
 
 export function Contact() {
   return (
@@ -45,7 +46,7 @@ export function Contact() {
                     <label htmlFor="phone" className="block text-sm mb-2">
                       Phone
                     </label>
-                    <Input id="phone" type="tel" placeholder="(815) 244-3034" />
+                    <Input id="phone" type="tel" placeholder={siteConfig.contact.phone} />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm mb-2">
@@ -70,7 +71,7 @@ export function Contact() {
               <IconWrapper icon={Phone} />
               <div>
                 <h3 className="text-lg mb-1">Phone</h3>
-                <p className="text-slate-600">(815) 244-3034</p>
+                <p className="text-slate-600">{siteConfig.contact.phone}</p>
               </div>
             </div>
 
@@ -78,7 +79,7 @@ export function Contact() {
               <IconWrapper icon={Mail} />
               <div>
                 <h3 className="text-lg mb-1">Email</h3>
-                <p className="text-slate-600">info@iveymonuments.com</p>
+                <p className="text-slate-600">{siteConfig.contact.email}</p>
               </div>
             </div>
 
@@ -86,8 +87,8 @@ export function Contact() {
               <IconWrapper icon={MapPin} />
               <div>
                 <h3 className="text-lg mb-1">Location</h3>
-                <p className="text-slate-600">204 W Market St,</p>
-                <p className="text-slate-600">Mt Carroll, IL 61053</p>
+                <p className="text-slate-600">{siteConfig.contact.address.street + ','}</p>
+                <p className="text-slate-600">{`${siteConfig.contact.address.city}, ${siteConfig.contact.address.state} ${siteConfig.contact.address.zip}`}</p>
               </div>
             </div>
 
@@ -95,7 +96,7 @@ export function Contact() {
               <IconWrapper icon={Clock} />
               <div>
                 <h3 className="text-lg mb-1">Hours</h3>
-                <p className="text-slate-600">Monday - Friday: 10:00 AM - 2:00 PM</p>
+                <p className="text-slate-600">{`${siteConfig.contact.hours[0].days}: ${siteConfig.contact.hours[0].time}`}</p>
               </div>
             </div>
           </div>

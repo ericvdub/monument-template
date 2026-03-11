@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture Overview
 
-This is an Astro-based website for Ivey Monuments using React components with TypeScript and Tailwind CSS for styling.
+This is a reusable monument company website template built with Astro, React components, TypeScript, and Tailwind CSS. All company-specific content is centralized in `src/config/site.ts`.
 
 ### Project Structure
 - **Astro Framework**: Uses Astro v5 with React integration for component hydration

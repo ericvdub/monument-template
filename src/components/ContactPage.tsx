@@ -6,41 +6,38 @@ import { Card, CardContent } from './ui/card';
 import IconWrapper from './ui/IconWrapper';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { siteConfig } from '../config/site';
 
 const contactInfo = [
   {
     icon: Phone,
     title: 'Phone',
-    lines: ['(815) 244-3034'],
-    href: 'tel:815-244-3034',
+    lines: [siteConfig.contact.phone],
+    href: siteConfig.contact.phoneTel,
   },
   {
     icon: Mail,
     title: 'Email',
-    lines: ['info@iveymonuments.com'],
-    href: 'mailto:info@iveymonuments.com',
+    lines: [siteConfig.contact.email],
+    href: `mailto:${siteConfig.contact.email}`,
   },
   {
     icon: MapPin,
     title: 'Address',
-    lines: ['204 W Market St', 'Mt Carroll, IL 61053'],
-    href: 'https://maps.google.com/?q=204+W+Market+St+Mt+Carroll+IL+61053',
+    lines: [siteConfig.contact.address.street, `${siteConfig.contact.address.city}, ${siteConfig.contact.address.state} ${siteConfig.contact.address.zip}`],
+    href: siteConfig.contact.googleMapsUrl,
   },
   {
     icon: Clock,
     title: 'Hours',
-    lines: ['Monday – Friday: 10:00 AM – 2:00 PM', 'Or by appointment'],
+    lines: [`${siteConfig.contact.hours[0].days}: ${siteConfig.contact.hours[0].time}`, siteConfig.contact.hoursNote],
     href: null,
   },
 ];
 
-const cemeteries = [
-  'Carroll County: Mt Carroll Cemetery, Shannon Cemetery, Milledgeville Cemetery, Lanark Township Cemetery',
-  'Whiteside County: Morrison City Cemetery, Tampico Cemetery, Prophetstown Cemetery',
-  'Jo Daviess County: Galena Township Cemetery, Elizabeth Township Cemetery',
-  'Ogle County: Oregon Cemetery, Rochelle Township Cemetery',
-  'Lee County: Dixon Cemetery, Amboy Township Cemetery',
-];
+const cemeteries = siteConfig.cemeteryCoverage.map(
+  (entry) => `${entry.county}: ${entry.cemeteries.join(', ')}`
+);
 
 export function ContactPage() {
   return (
@@ -53,7 +50,7 @@ export function ContactPage() {
         style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">Mt Carroll, Illinois</p>
+          <p className="text-amber-400 uppercase tracking-widest text-sm mb-4">{`${siteConfig.contact.address.city}, ${siteConfig.company.state}`}</p>
           <h1 className="text-5xl font-serif mb-6">Get In Touch</h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             We're here to help you create a lasting memorial. Reach out for a free, no-pressure consultation.
@@ -121,7 +118,7 @@ export function ContactPage() {
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm mb-2">Phone</label>
-                      <Input id="phone" type="tel" placeholder="(815) 244-3034" />
+                      <Input id="phone" type="tel" placeholder={siteConfig.contact.phone} />
                     </div>
                     <div>
                       <label htmlFor="message" className="block text-sm mb-2">Message</label>
@@ -145,8 +142,8 @@ export function ContactPage() {
                 <h2 className="text-3xl font-serif mb-6">Find Us</h2>
                 <div className="rounded-xl overflow-hidden shadow-md">
                   <iframe
-                    title="Ivey Monuments Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2975.1234567890!2d-89.974097!3d42.098543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880b1e3b3f0f0f0f%3A0x0!2s204+W+Market+St%2C+Mt+Carroll%2C+IL+61053!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                    title={`${siteConfig.company.name} Location`}
+                    src={siteConfig.contact.googleMapsEmbedUrl}
                     width="100%"
                     height="300"
                     style={{ border: 0 }}
@@ -156,7 +153,7 @@ export function ContactPage() {
                   />
                 </div>
                 <p className="text-slate-600 mt-3 text-sm">
-                  204 W Market St, Mt Carroll, IL 61053
+                  {siteConfig.contact.address.full}
                 </p>
               </div>
 
@@ -171,7 +168,7 @@ export function ContactPage() {
                   ))}
                 </ul>
                 <p className="text-slate-500 text-sm mt-4">
-                  Don't see your area? Call us — we serve families throughout northwest Illinois.
+                  {`Don't see your area? Call us — we serve families throughout ${siteConfig.company.region}.`}
                 </p>
                 <div className="mt-6 space-y-2">
                   <p className="text-sm font-semibold text-slate-700">Popular service pages</p>

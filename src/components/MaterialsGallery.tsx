@@ -1,6 +1,7 @@
 import { Card, CardContent } from './ui/card';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { siteConfig } from '../config/site';
 
 interface MaterialCard {
   name: string;
@@ -138,7 +139,7 @@ export function MaterialsGallery() {
       <section className="py-12 px-6 bg-slate-100">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-slate-600 text-sm">
-            * Color swatches shown are for reference only. Actual granite appearance varies by slab and lighting. We recommend viewing physical samples at our Mt Carroll showroom before finalizing your selection.
+            {`* Color swatches shown are for reference only. Actual granite appearance varies by slab and lighting. We recommend viewing physical samples at our ${siteConfig.contact.address.city} showroom before finalizing your selection.`}
           </p>
         </div>
       </section>
@@ -151,7 +152,7 @@ export function MaterialsGallery() {
         <div className="max-w-2xl mx-auto">
           <h2 className="text-4xl font-serif mb-4 text-slate-900">Visit Our Showroom</h2>
           <p className="text-slate-700 mb-8">
-            See and touch our granite samples in person at our Mt Carroll location. Our team will walk you through every option.
+            {`See and touch our granite samples in person at our ${siteConfig.contact.address.city} location. Our team will walk you through every option.`}
           </p>
           <a
             href="/contact"

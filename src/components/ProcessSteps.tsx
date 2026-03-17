@@ -1,37 +1,23 @@
-import { PenTool, Users, FileSearch, Sparkles, CheckCircle } from 'lucide-react';
+import { PenTool, FileSearch, CheckCircle } from 'lucide-react';
 
 export function ProcessSteps() {
   const steps = [
     {
       number: 1,
-      title: "Create Your Design",
+      title: "Create & Share Your Design",
       description:
-        "Choose a template, add names and dates, upload artwork, and craft a meaningful epitaph.",
+        "Choose a template, add names and dates, upload artwork, and craft a meaningful epitaph. Invite loved ones to gather input and memories.",
       icon: PenTool,
     },
     {
       number: 2,
-      title: "Invite Loved Ones",
+      title: "Expert Review & Refinement",
       description:
-        "Share your design to gather input, memories, and support from family and friends.",
-      icon: Users,
-    },
-    {
-      number: 3,
-      title: "Submit for Expert Review",
-      description:
-        "Our team reviews your design, offering refinements and options to ensure accuracy and beauty.",
+        "Our team reviews your design and collaborates with you to finalize every detail until it feels exactly right.",
       icon: FileSearch,
     },
     {
-      number: 4,
-      title: "Perfect the Details",
-      description:
-        "We collaborate with you to finalize every element until it feels exactly right.",
-      icon: Sparkles,
-    },
-    {
-      number: 5,
+      number: 3,
       title: "Approve & Begin Production",
       description:
         "Once approved, we begin crafting and installing your custom headstone with care.",
@@ -55,7 +41,7 @@ export function ProcessSteps() {
           {/* Connecting line */}
           <div className="hidden md:block absolute left-0 right-0 top-16 h-0.5 bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200" />
 
-          <div className="grid md:grid-cols-5 gap-8 md:gap-4">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-4">
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (

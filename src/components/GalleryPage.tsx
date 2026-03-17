@@ -453,7 +453,7 @@ export function GalleryPage({ images }: { images: RawImageData[] }) {
 
       {/* CTA */}
       <section className="py-16 px-6 bg-white text-center">
-        <h3 className="text-3xl font-serif mb-4 text-slate-900">Like What You See?</h3>
+        <h2 className="text-3xl font-serif mb-4 text-slate-900">Like What You See?</h2>
         <p className="text-slate-600 mb-8 max-w-xl mx-auto">
           Every monument is custom — contact us to discuss your vision and get a free consultation.
         </p>

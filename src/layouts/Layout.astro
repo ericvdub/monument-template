@@ -45,6 +45,10 @@ const structuredDataItems = Array.isArray(structuredData)
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="robots" content={robots} />
+		<meta name="geo.region" content={`US-${siteConfig.company.stateAbbr}`} />
+		<meta name="geo.placename" content={siteConfig.contact.address.city} />
+		<meta name="geo.position" content={`${siteConfig.contact.coordinates.latitude};${siteConfig.contact.coordinates.longitude}`} />
+		<meta name="ICBM" content={`${siteConfig.contact.coordinates.latitude}, ${siteConfig.contact.coordinates.longitude}`} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />

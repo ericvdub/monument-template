@@ -79,13 +79,13 @@ export function Navbar() {
                 />
               </div>
               <div>
-                <h1 className={`font-serif leading-tight transition-all duration-300 ${
+                <span className={`font-serif leading-tight transition-all duration-300 block ${
                   isScrolled ? 'text-2xl' : 'text-2xl md:text-3xl lg:text-4xl'
                 } ${
                   isScrolled ? 'text-slate-900' : 'text-white'
                 }`}>
                   {siteConfig.company.name}
-                </h1>
+                </span>
 				<p className={`transition-all duration-300 ${
                   isScrolled ? 'text-sm text-slate-500' : 'text-base md:text-lg text-slate-300'
                 }`}>
@@ -111,6 +111,8 @@ export function Navbar() {
               <a
                 href={startDesignHref}
                 onClick={handleLinkClick}
+                rel="noopener noreferrer"
+                target="_blank"
                 className="px-4 py-2 rounded-lg text-white font-medium shadow-md transition-all"
                 style={{ backgroundColor: 'var(--brand-primary)' }}
                 onMouseEnter={(e) => {
@@ -199,6 +201,8 @@ export function Navbar() {
             <a
               href={startDesignHref}
               onClick={handleLinkClick}
+              rel="noopener noreferrer"
+              target="_blank"
               className="flex items-center justify-center px-4 py-3 text-white rounded-lg transition-colors font-medium"
               style={{ backgroundColor: 'var(--brand-primary)' }}
               onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}

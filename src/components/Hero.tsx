@@ -17,9 +17,9 @@ export function Hero() {
 
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl px-6 w-full ml-auto">
-            <h2 className="text-5xl md:text-6xl mb-6 font-serif">
+            <h1 className="text-5xl md:text-6xl mb-6 font-serif">
               {siteConfig.hero.headline}
-            </h2>
+            </h1>
             <p className="max-w-xl text-xl text-text-primary-foreground mb-8">
               {siteConfig.hero.subheadline}
             </p>
@@ -28,7 +28,7 @@ export function Hero() {
                 size="xl"
 				variant="secondary"
               >
-                <a href={siteConfig.urls.designerUrl}>Start a Design Online</a>
+                <a href={siteConfig.urls.designerUrl} rel="noopener noreferrer" target="_blank">Start a Design Online</a>
               </Button>
               <Button
                 size="xl"

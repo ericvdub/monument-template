@@ -9,6 +9,8 @@ import {
   localBusinessId,
   localBusinessSchema,
   serviceAreas,
+  serviceAreaCounties,
+  serviceAreaCities,
 } from "../../data/localSeo";
 
 const title =
@@ -54,10 +56,16 @@ const serviceSchema = {
   provider: {
     "@id": localBusinessId,
   },
-  areaServed: serviceAreas.map((area) => ({
-    "@type": "AdministrativeArea",
-    name: area,
-  })),
+  areaServed: [
+    ...serviceAreaCounties.map((county) => ({
+      "@type": "AdministrativeArea",
+      name: county,
+    })),
+    ...serviceAreaCities.map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
+  ],
 };
 ---
 

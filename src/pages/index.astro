@@ -3,8 +3,9 @@
 import Layout from '../layouts/Layout.astro';
 import App from '../App.jsx';
 import "../styles/global.css";
+import { localBusinessSchema, faqSchema } from '../data/localSeo';
 ---
 
-<Layout>
+<Layout structuredData={[localBusinessSchema, faqSchema]}>
     <App client:load />
 </Layout>

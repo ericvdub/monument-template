@@ -8,6 +8,8 @@ import {
   localBusinessId,
   localBusinessSchema,
   serviceAreas,
+  serviceAreaCounties,
+  serviceAreaCities,
 } from "../../data/localSeo";
 
 const title =
@@ -53,10 +55,16 @@ const serviceSchema = {
   provider: {
     "@id": localBusinessId,
   },
-  areaServed: serviceAreas.map((area) => ({
-    "@type": "AdministrativeArea",
-    name: area,
-  })),
+  areaServed: [
+    ...serviceAreaCounties.map((county) => ({
+      "@type": "AdministrativeArea",
+      name: county,
+    })),
+    ...serviceAreaCities.map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
+  ],
 };
 ---
 
@@ -194,6 +202,8 @@ const serviceSchema = {
         <div class="flex flex-wrap justify-center gap-4">
           <a
             href={siteConfig.urls.designerUrl}
+            rel="noopener noreferrer"
+            target="_blank"
             class="px-6 py-3 rounded-lg text-white transition-opacity hover:opacity-90"
             style="background-color: var(--brand-primary);"
           >

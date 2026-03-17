@@ -78,6 +78,30 @@ export const siteConfig = {
   // --------------------------------------------------------------------------
   // Service Areas
   // --------------------------------------------------------------------------
+  /** Counties served — used for on-page display and schema markup */
+  serviceAreaCounties: [
+    "Sangamon County, Illinois",
+    "Menard County, Illinois",
+    "Morgan County, Illinois",
+    "Logan County, Illinois",
+    "Christian County, Illinois",
+  ],
+  /** Cities served — used in schema markup for granular local SEO targeting.
+   *  Should correspond to cities within the counties above, especially those
+   *  where you regularly install monuments or have cemetery relationships. */
+  serviceAreaCities: [
+    "Springfield, IL",
+    "Petersburg, IL",
+    "Jacksonville, IL",
+    "Lincoln, IL",
+    "Taylorville, IL",
+    "Chatham, IL",
+    "Rochester, IL",
+    "Auburn, IL",
+    "Riverton, IL",
+    "Williamsville, IL",
+  ],
+  /** Combined county list for backward compatibility */
   serviceAreas: [
     "Sangamon County, Illinois",
     "Menard County, Illinois",
@@ -129,11 +153,13 @@ export const siteConfig = {
 
   // --------------------------------------------------------------------------
   // Hero Section
+  // The hero headline is rendered as the page's <h1> — include location and
+  // primary keywords (e.g. "monuments", "headstones") for SEO.
   // --------------------------------------------------------------------------
   hero: {
-    headline: "Crafted to Honor Every Story",
+    headline: "Custom Monuments & Headstones in Springfield, IL",
     subheadline:
-      "Decades of experience helping families honor their loved ones with compassionate, personalized design.",
+      "Since 1950, Example Monuments has helped Illinois families honor their loved ones with quality granite memorials, compassionate service, and personalized design.",
   },
 
   // --------------------------------------------------------------------------
@@ -259,27 +285,29 @@ export const siteConfig = {
 
   // --------------------------------------------------------------------------
   // SEO Defaults
+  // Title tags should be keyword-rich and include location.
+  // Descriptions should include service areas, services, and a call to action.
   // --------------------------------------------------------------------------
   seo: {
-    defaultTitle: "Example Monuments | Serving Our Community Since 1950",
+    defaultTitle: "Example Monuments | Custom Headstones & Granite Memorials in Springfield, IL",
     defaultDescription:
-      "Example Monuments has served local families since 1950. We craft quality granite monuments, headstones, and memorials in Springfield, IL.",
-    aboutTitle: "About Example Monuments | Serving Our Community Since 1950",
+      "Example Monuments crafts custom granite headstones, monuments, and memorials in Springfield, IL. Serving Sangamon, Menard, Morgan, Logan, and Christian counties since 1950. Free consultations available.",
+    aboutTitle: "About Example Monuments | 75 Years of Monument Craftsmanship | Springfield, IL",
     aboutDescription:
-      "Learn the story of Example Monuments — a family-owned monument company serving the local community since 1950. Quality granite memorials with a 100% satisfaction guarantee.",
-    contactTitle: "Contact Example Monuments | Springfield, IL | (555) 123-4567",
+      "Learn the story of Example Monuments — a family-owned monument company serving Springfield and central Illinois since 1950. Quality granite headstones and memorials with a 100% satisfaction guarantee.",
+    contactTitle: "Contact Example Monuments | Free Monument Consultation | Springfield, IL",
     contactDescription:
-      "Contact Example Monuments in Springfield, IL. Call (555) 123-4567 or send a message for a free monument consultation.",
-    galleryTitle: "Monument Gallery | Example Monuments | Springfield, IL",
+      "Contact Example Monuments in Springfield, IL. Call (555) 123-4567 or send a message for a free headstone and monument consultation. Serving Sangamon, Menard, Morgan, Logan, and Christian counties.",
+    galleryTitle: "Headstone & Monument Gallery | Granite Memorials | Example Monuments",
     galleryDescription:
-      "Browse granite monuments, flat markers, slants, benches, and custom memorial designs by Example Monuments.",
-    materialsTitle: "Granite & Material Colors | Example Monuments | Springfield, IL",
+      "Browse our gallery of custom granite headstones, upright monuments, flat markers, slants, benches, and memorial designs crafted by Example Monuments in Springfield, IL.",
+    materialsTitle: "Granite Colors & Monument Materials | Black, Gray, Pink Granite | Example Monuments",
     materialsDescription:
-      "Explore granite colors and materials available from Example Monuments — including Black, Gray, Pink, Blue Pearl, Red granite, marble, and bronze.",
+      "Explore granite colors and memorial materials available from Example Monuments in Springfield, IL — Jet Black, Dark Gray, Pink, Blue Pearl, Red granite, marble, and bronze for headstones and monuments.",
     servicesTitle:
-      "Monument Services | Headstones & Cemetery Memorials",
+      "Monument Services in Central Illinois | Headstones & Cemetery Memorials",
     servicesDescription:
-      "Explore headstone and cemetery monument services from Example Monuments in Springfield, IL.",
+      "Explore headstone and cemetery monument services from Example Monuments in Springfield, IL. Serving Sangamon, Menard, Morgan, Logan, and Christian counties.",
   },
 
   // --------------------------------------------------------------------------
@@ -291,4 +319,4 @@ export const siteConfig = {
 } as const;
 
 // Export shorthand accessors for convenience
-export const { company, contact, urls, colors, serviceAreas, cemeteryCoverage } = siteConfig;
+export const { company, contact, urls, colors, serviceAreas, serviceAreaCounties, serviceAreaCities, cemeteryCoverage } = siteConfig;

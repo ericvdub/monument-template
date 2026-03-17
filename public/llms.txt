@@ -1,0 +1,53 @@
+# Example Monuments
+
+> Example Monuments is a family-owned monument company in Springfield, Illinois, crafting custom granite headstones, monuments, and memorials since 1950. We serve families across central Illinois with compassionate, personalized service and a 100% satisfaction guarantee.
+
+## Business Information
+
+- Name: Example Monuments
+- Address: 123 Main St, Springfield, IL 62701
+- Phone: (555) 123-4567
+- Email: info@examplemonuments.com
+- Website: https://www.examplemonuments.com
+- Hours: Monday – Friday 9:00 AM – 5:00 PM, or by appointment
+- Founded: 1950
+
+## Services
+
+- Custom granite headstones (upright monuments, flat markers, slants, companion memorials)
+- Memorial benches
+- Custom monument design and engraving (etched portraits, religious symbols, military emblems)
+- Cemetery monument installation on prepared foundations
+- Monument restoration and re-lettering
+- Online monument designer: https://lastingmemori.com/designer/example-monuments
+
+## Materials
+
+- Granite: Jet Black, Dark Gray, Medium Gray, Pink/Rose, Blue Pearl, Imperial Red
+- Marble: White, Gray
+- Bronze: Antique Bronze plaques
+
+## Service Area
+
+Counties served: Sangamon County, Menard County, Morgan County, Logan County, and Christian County in central Illinois.
+
+Cities served: Springfield, Petersburg, Jacksonville, Lincoln, Taylorville, Chatham, Rochester, Auburn, Riverton, and Williamsville.
+
+## Cemeteries We Serve
+
+- Sangamon County: Oak Ridge Cemetery, Camp Butler National Cemetery, Calvary Cemetery, Roselawn Memorial Park
+- Menard County: Oakland Cemetery, Rose Hill Cemetery
+- Morgan County: Diamond Grove Cemetery, East Cemetery, Memorial Lawn Cemetery
+- Logan County: Union Cemetery, Zion Cemetery
+- Christian County: Graceland Cemetery, Harristown Cemetery
+
+## Pages
+
+- Home: https://www.examplemonuments.com
+- About: https://www.examplemonuments.com/about
+- Services: https://www.examplemonuments.com/services
+- Headstones & Memorials: https://www.examplemonuments.com/services/headstones-memorials
+- Cemetery Coverage: https://www.examplemonuments.com/services/cemetery-coverage
+- Gallery: https://www.examplemonuments.com/gallery
+- Materials: https://www.examplemonuments.com/materials
+- Contact: https://www.examplemonuments.com/contact
